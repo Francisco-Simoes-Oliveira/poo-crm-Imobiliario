@@ -5,38 +5,39 @@ import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import modelo.Cliente;
+import modelo.Imovel;
+import modelo.Endereco;
 import modelo.StatusPessoa;
-import service.ClienteService;
+import org.json.JSONObject;
+import service.ImovelService;
 import service.ImovelService;
 import view.MainApp;
 
 public class FormImovelController {
     private ImovelService service = new ImovelService();
 
-    @FXML
-    private TextField nomeField;
-    @FXML private TextField cpfField;
-    @FXML private TextField emailField;
+    @FXML private TextField nomeCidadeField;
+    @FXML private TextField cepField;
+    @FXML private TextField logradouroField;
     @FXML private TextField telefoneField;
     @FXML private RadioButton status;
 
-    private Cliente clienteAtual;
-    private ObservableList<Cliente> clientesObservable;
+    private Imovel imovelAtual;
+    private ObservableList<Imovel> imovelsObservable;
 
-    public void setClientesObservable(ObservableList<Cliente> clientesObservable) {
-        this.clientesObservable = clientesObservable;
+    public void setImovelsObservable(ObservableList<Imovel> imovelsObservable) {
+        this.imovelsObservable = imovelsObservable;
     }
-    public void setCliente(Cliente cliente) {
-        this.clienteAtual = cliente;
+    public void setImovel(Imovel imovel) {
+        this.imovelAtual = imovel;
         // Preenche os campos de texto normalmente
-        nomeField.setText(cliente.getNome());
-        cpfField.setText(cliente.getCpf());
-        emailField.setText(cliente.getEmail());
-        telefoneField.setText(cliente.getTelefone());
+        nomeCidadeField.setText(imovel.getNome());
+        cepField.setText(imovel.getCpf());
+        emailField.setText(imovel.getEmail());
+        telefoneField.setText(imovel.getTelefone());
 
         // 🔹 Seleciona ou não o RadioButton conforme o status
-        if (cliente.getStatus() == StatusPessoa.ATIVO) {
+        if (imovel.getStatus() == StatusPessoa.ATIVO) {
             status.setSelected(true);
         } else {
             status.setSelected(false);
@@ -44,32 +45,38 @@ public class FormImovelController {
 
     }
 
+    @FXML
+    private void buscaCep(){
+        JSONObject obj = Endereco.buscaViaCep(cepField.getText());
+        nomeCidadeField.setText(obj.getString("localidade"));
+    }
+
 
     @FXML
     private void salvar() {
 
-        if (nomeField.getText().isEmpty() || cpfField.getText().isEmpty()) {
+        if (nomeCidadeField.getText().isEmpty() || cepField.getText().isEmpty()) {
             MainApp.mostrarAlerta("Erro", "O campo nome e CPF são obrigatórios!");
             return;
         }
-        if(!nomeField.getText().isEmpty() && !cpfField.getText().isEmpty()) {
-            if (Cliente.validarCpf(cpfField.getText())) {
+        if(!nomeCidadeField.getText().isEmpty() && !cepField.getText().isEmpty()) {
+            if (Imovel.validarCpf(cepField.getText())) {
 
-                if (clienteAtual == null) clienteAtual = new Cliente();
-                clienteAtual.setNome(nomeField.getText());
-                clienteAtual.setCpf(cpfField.getText());
-                clienteAtual.setEmail(emailField.getText());
-                clienteAtual.setTelefone(telefoneField.getText());
+                if (imovelAtual == null) imovelAtual = new Imovel();
+                imovelAtual.setNome(nomeCidadeField.getText());
+                imovelAtual.setCpf(cepField.getText());
+                imovelAtual.setEmail(emailField.getText());
+                imovelAtual.setTelefone(telefoneField.getText());
 
                 if (status.isSelected()){
-                    clienteAtual.setStatus(StatusPessoa.ATIVO);
+                    imovelAtual.setStatus(StatusPessoa.ATIVO);
                 }else {
-                    clienteAtual.setStatus(StatusPessoa.DESATIVADO);
+                    imovelAtual.setStatus(StatusPessoa.DESATIVADO);
                 }
-                service.alter(clienteAtual);
-                Stage stage = (Stage) nomeField.getScene().getWindow();
-                if (clientesObservable != null) {
-                    clientesObservable.add(clienteAtual);
+                service.alter(imovelAtual);
+                Stage stage = (Stage) nomeCidadeField.getScene().getWindow();
+                if (imovelsObservable != null) {
+                    imovelsObservable.add(imovelAtual);
                 }
                 stage.close();
             }else MainApp.mostrarAlerta("Erro", "CPF inválido!");;
@@ -77,7 +84,7 @@ public class FormImovelController {
     }
     @FXML
     private void cancelar(){
-        Stage stage = (Stage) nomeField.getScene().getWindow();
+        Stage stage = (Stage) nomeCidadeField.getScene().getWindow();
         stage.close();
     }
 }

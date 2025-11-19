@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FormImovelController">
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -19,14 +20,46 @@
                         </Label>
                      </children></HBox>
                   <Separator prefWidth="200.0" />
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="200.0">
                      <children>
-                        <VBox prefHeight="100.0" prefWidth="279.0">
-                            <Label prefHeight="17.0" prefWidth="50.0" text="Cidade" />
-                            <TextField prefHeight="25.0" prefWidth="206.0" />
+                        <VBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="263.0">
+                            <Label prefHeight="17.0" prefWidth="50.0" text="CIDADE" />
+                            <TextField fx:id="nomeCidadeField" prefHeight="19.0" prefWidth="262.0" promptText="Nome da Cidade" />
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
                         </VBox>
+                         <VBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="225.0">
+                             <Label prefHeight="17.0" prefWidth="50.0" text="CEP" />
+                           <AnchorPane prefHeight="20.0" prefWidth="200.0">
+                              <children>
+                                   <TextField fx:id="cepField" layoutY="9.0" prefHeight="25.0" prefWidth="226.0" promptText="000000000" />
+                                 <Button layoutX="212.0" layoutY="22.0" mnemonicParsing="false" onAction="#buscaCep" style="-fx-background-radius: 50;" text="🔍" />
+                              </children>
+                           </AnchorPane>
+                             <HBox.margin>
+                                 <Insets left="50.0" />
+                             </HBox.margin>
+                         </VBox>
                      </children></HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" />
+                   <HBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="200.0">
+                       <children>
+                           <VBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="263.0">
+                               <Label prefHeight="17.0" prefWidth="88.0" text="LOGRADOURO" />
+                               <TextField fx:id="logradouroField" prefHeight="19.0" prefWidth="262.0" promptText="Logradouro" />
+                               <HBox.margin>
+                                   <Insets left="10.0" />
+                               </HBox.margin>
+                           </VBox>
+                           <VBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="227.0">
+                               <Label prefHeight="17.0" prefWidth="50.0" text="UF" />
+                               <TextField fx:id="ufField" prefHeight="25.0" prefWidth="180.0" promptText="UF" />
+                               <HBox.margin>
+                                   <Insets left="50.0" />
+                               </HBox.margin>
+                           </VBox>
+                       </children>
+                   </HBox>
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" visible="false" />
