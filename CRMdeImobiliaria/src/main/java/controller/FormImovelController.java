@@ -30,8 +30,8 @@ public class FormImovelController {
     public void setImovel(Imovel imovel) {
         this.imovelAtual = imovel;
         // Preenche os campos de texto normalmente
-        nomeCidadeField.setText(imovel.getNome());
-        cepField.setText(imovel.getCpf());
+        nomeCidadeField.setText(imovel.getEndereco().getCidade());
+        cepField.setText(imovel.getEndereco());
         emailField.setText(imovel.getEmail());
         telefoneField.setText(imovel.getTelefone());
 
