@@ -10,7 +10,6 @@ import modelo.Endereco;
 import modelo.StatusPessoa;
 import org.json.JSONObject;
 import service.ImovelService;
-import service.ImovelService;
 import view.MainApp;
 
 public class FormImovelController {

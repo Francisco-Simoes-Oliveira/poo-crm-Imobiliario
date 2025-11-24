@@ -22,14 +22,18 @@ public class Endereco {
     private String bairro;
     private String cidade;
     private String uf;
+    private String numero;
+    private String complemento;
 
     public Endereco() {}
 
-    public Endereco(String logradouro, String bairro, String cidade, String uf) {
+    public Endereco(String logradouro, String bairro, String cidade, String uf,String numero, String complemento) {
         this.logradouro = logradouro;
         this.bairro = bairro;
         this.cidade = cidade;
         this.uf = uf;
+        this.numero = numero;
+        this.complemento = complemento;
     }
 
     public static JSONObject buscaViaCep(String cep) {
@@ -87,5 +91,21 @@ public class Endereco {
 
     public void setUf(String uf) {
         this.uf = uf;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
     }
 }

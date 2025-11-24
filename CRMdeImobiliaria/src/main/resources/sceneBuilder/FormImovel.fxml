@@ -60,6 +60,24 @@
                            </VBox>
                        </children>
                    </HBox>
+                   <HBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="200.0">
+                       <children>
+                           <VBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="263.0">
+                               <Label prefHeight="17.0" prefWidth="88.0" text="NUMERO" />
+                               <TextField fx:id="logradouroField" prefHeight="19.0" prefWidth="262.0" promptText="Numero" />
+                               <HBox.margin>
+                                   <Insets left="10.0" />
+                               </HBox.margin>
+                           </VBox>
+                           <VBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="227.0">
+                               <Label prefHeight="17.0" prefWidth="108.0" text="COMPLEMENTO" />
+                               <TextField fx:id="ufField" prefHeight="25.0" prefWidth="180.0" promptText="Complemeto" />
+                               <HBox.margin>
+                                   <Insets left="50.0" />
+                               </HBox.margin>
+                           </VBox>
+                       </children>
+                   </HBox>
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" visible="false" />
