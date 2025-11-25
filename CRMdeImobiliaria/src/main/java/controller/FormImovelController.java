@@ -18,8 +18,11 @@ public class FormImovelController {
     @FXML private TextField nomeCidadeField;
     @FXML private TextField cepField;
     @FXML private TextField logradouroField;
-    @FXML private TextField telefoneField;
-    @FXML private RadioButton status;
+    @FXML private TextField ufField;
+    @FXML private TextField numeroField;
+    @FXML private TextField complementoField;
+
+
 
     private Imovel imovelAtual;
     private ObservableList<Imovel> imovelsObservable;
@@ -31,17 +34,11 @@ public class FormImovelController {
         this.imovelAtual = imovel;
         // Preenche os campos de texto normalmente
         nomeCidadeField.setText(imovel.getEndereco().getCidade());
-        cepField.setText(imovel.getEndereco());
-        emailField.setText(imovel.getEmail());
-        telefoneField.setText(imovel.getTelefone());
-
-        // 🔹 Seleciona ou não o RadioButton conforme o status
-        if (imovel.getStatus() == StatusPessoa.ATIVO) {
-            status.setSelected(true);
-        } else {
-            status.setSelected(false);
-        }
-
+        cepField.setText(imovel.getEndereco().getCep());
+        logradouroField.setText(imovel.getEndereco().getLogradouro());
+        ufField.setText(imovel.getEndereco().getUf());
+        numeroField.setText(imovel.getEndereco().getNumero());
+        complementoField.setText(imovel.getEndereco().getComplemento());
     }
 
     @FXML
