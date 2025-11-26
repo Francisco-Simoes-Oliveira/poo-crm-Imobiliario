@@ -47,7 +47,7 @@ public class FormImovelController {
         nomeCidadeField.setText(obj.getString("localidade"));
     }
 
-
+/*
     @FXML
     private void salvar() {
 
@@ -82,5 +82,5 @@ public class FormImovelController {
     private void cancelar(){
         Stage stage = (Stage) nomeCidadeField.getScene().getWindow();
         stage.close();
-    }
+    }*/
 }

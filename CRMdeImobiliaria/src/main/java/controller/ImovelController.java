@@ -4,83 +4,77 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.Cliente;
 import modelo.Imovel;
+import service.ImovelService;
 
 import java.io.IOException;
 
 public class ImovelController extends BaseController {
 
+    private ImovelService service = new ImovelService();
+
     @FXML private ComboBox<String> comboFiltro;
     @FXML private TextField campoPesquisa;
 
     @FXML
-    private TableView<Cliente> tabelaClientes;
-    private ObservableList<Cliente> clientesObservable;
+    private TableView<Imovel> tabelaImovels;
+    private ObservableList<Imovel> imovelsObservable;
 
     @FXML
-    private TableColumn<Cliente, String> colunaId;
+    private TableColumn<Imovel, String> colunaId;
     @FXML
-    private TableColumn<Cliente, String> colunaNome;
+    private TableColumn<Imovel, String> colunaLogradoro;
     @FXML
-    private TableColumn<Cliente, String> colunaEmail;
+    private TableColumn<Imovel, String> colunaStatus;
     @FXML
-    private TableColumn<Cliente, String> colunaTelefone;
+    private TableColumn<Imovel, Void> colunaImg;
     @FXML
-    private TableColumn<Cliente, String> colunaStatus;
-
+    private TableColumn<Imovel, Void> colunaInfo;
     @FXML
-    private TableColumn<Cliente, Void> colunaAcoes;
+    private TableColumn<Imovel, Void> colunaAcoes;
 
     @FXML
     public void initialize() {
         comboFiltro.getSelectionModel().selectFirst(); // Seleciona "Nome" por padrão
 
 
-        // 1️⃣ Vincula cada coluna à propriedade correspondente da classe Cliente
+        // 1️⃣ Vincula cada coluna à propriedade correspondente da classe Imovel
         colunaId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        colunaEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-        colunaTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+        colunaLogradoro.setCellValueFactory(new PropertyValueFactory<>("logradoro"));
         colunaStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-
+        colunaImg.setCellValueFactory(new PropertyValueFactory<>("img"));
+        colunaInfo.setCellValueFactory(new PropertyValueFactory<>("info"));
 
         // 2️⃣ Define tamanhos preferenciais (servem como "proporções")
         colunaId.setPrefWidth(60);
-        colunaNome.setPrefWidth(200);
-        colunaEmail.setPrefWidth(240);
-        colunaTelefone.setPrefWidth(120);
-        colunaStatus.setPrefWidth(120);
+        colunaLogradoro.setPrefWidth(200);
+        colunaStatus.setPrefWidth(150);
+       
 
         // (Opcional) Define tamanhos mínimos para não espremer demais
-        colunaNome.setMinWidth(150);
-        colunaEmail.setMinWidth(180);
+        colunaLogradoro.setMinWidth(150);
 
         // 3️⃣ Ativa o redimensionamento automático das colunas
-        tabelaClientes.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
+        tabelaImovels.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
 
         // 4️⃣ Carrega os
-        carregarClientes();
+        carregarImovels();
 
         campoPesquisa.textProperty().addListener((obs, oldVal, newVal) -> pesquisar());
 
-        tabelaClientes.setRowFactory(tv -> {
-            TableRow<Cliente> row = new TableRow<>();
+        tabelaImovels.setRowFactory(tv -> {
+            TableRow<Imovel> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && !row.isEmpty()) {
-                    Cliente clienteSelecionado = row.getItem();
-                    abrirModalEdicao(clienteSelecionado);
+                    Imovel imovelSelecionado = row.getItem();
+                    abrirModalEdicao(imovelSelecionado);
                 }
             });
             return row;
@@ -90,10 +84,46 @@ public class ImovelController extends BaseController {
             private final Button btn = new Button("Editar");
 
             {
-                btn.getStyleClass().add("edit-button"); // se quiser estilizar no CSS
+                btn.getStyleClass().add("edit-button");
                 btn.setOnAction(event -> {
-                    Cliente cliente = getTableView().getItems().get(getIndex());
-                    abrirModalEdicao(cliente);
+                    Imovel imovel = getTableView().getItems().get(getIndex());
+                    abrirModalEdicao(imovel);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(empty ? null : btn);
+            }
+        });
+
+        colunaImg.setCellFactory(coluna -> new TableCell<>() {
+            private final Button btn = new Button("Img");
+            
+            {
+                btn.getStyleClass().add("edit-button");
+                btn.setOnAction(event -> {
+                    Imovel imovel = getTableView().getItems().get(getIndex());
+                    abrirModalEdicao(imovel);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(empty ? null : btn);
+            }
+        });
+
+        colunaInfo.setCellFactory(coluna -> new TableCell<>() {
+            private final Button btn = new Button("Info");
+
+            {
+                btn.getStyleClass().add("edit-button");
+                btn.setOnAction(event -> {
+                    Imovel imovel = getTableView().getItems().get(getIndex());
+                    abrirModalEdicao(imovel);
                 });
             }
 
@@ -113,8 +143,8 @@ public class ImovelController extends BaseController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sceneBuilder/FormImovel.fxml"));
             Parent root = loader.load();
 
-            FormClienteController controller = loader.getController();
-            controller.setClientesObservable(clientesObservable);
+            FormImovelController controller = loader.getController();
+            controller.setImovelsObservable(imovelsObservable);
 
             // Cria um novo stage
             Stage modalStage = new Stage();
@@ -136,22 +166,22 @@ public class ImovelController extends BaseController {
         }
     }
 
-    private void carregarClientes() {
-        clientesObservable = FXCollections.observableArrayList(service.buscarTodos());
-        tabelaClientes.setItems(clientesObservable);
+    private void carregarImovels() {
+        imovelsObservable = FXCollections.observableArrayList(service.buscarTodos());
+        tabelaImovels.setItems(imovelsObservable);
     }
 
     private void abrirModalEdicao(Imovel imovel) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/sceneBuilder/FormCliente.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/sceneBuilder/FormImovel.fxml"));
             Parent root = loader.load();
 
-            // Passa o cliente selecionado para o controlador do modal
+            // Passa o imovel selecionado para o controlador do modal
             FormImovelController controller = loader.getController();
-            controller.setCliente(imovel); // você cria esse método no FormClienteController
+            controller.setImovel(imovel); // você cria esse método no FormImovelController
 
             Stage stage = new Stage();
-            stage.setTitle("Editar Cliente");
+            stage.setTitle("Editar Imovel");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(conteudo.getScene().getWindow());
 
@@ -159,10 +189,32 @@ public class ImovelController extends BaseController {
             stage.showAndWait(); // bloqueia até o modal ser fechado
 
             // Atualiza a tabela depois que o modal fecha
-            tabelaClientes.setItems(FXCollections.observableArrayList(service.buscarTodos()));
+            tabelaImovels.setItems(FXCollections.observableArrayList(service.buscarTodos()));
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void pesquisar(){
+        String filtro = comboFiltro.getValue();
+        String termo = campoPesquisa.getText().toLowerCase();
+
+        ObservableList<Imovel> filtrados = imovelsObservable.filtered(imovel -> {
+            if (termo.isEmpty()) return true;
+
+            switch (filtro) {
+                case "Logradouro":
+                    return imovel.getEndereco().getLogradouro().toLowerCase().contains(termo);
+                case "CEP":
+                    return imovel.getEndereco().getCep().contains(termo);
+                case "Status":
+                    return imovel.getStatusImovel().toString().toLowerCase().contains(termo);
+                default:
+                    return false;
+            }
+        });
+
+        tabelaImovels.setItems(filtrados);
     }
 
 }
@@ -170,7 +222,7 @@ public class ImovelController extends BaseController {
 
 /*
 private void formAddImovel(Stage principalStage){
-        Stage formCliente = new Stage();
+        Stage formImovel = new Stage();
         GridPane gridForm = new GridPane();
         Scene scene = new Scene(gridForm,450,300);
 
@@ -209,11 +261,11 @@ private void formAddImovel(Stage principalStage){
         Button salvar = new Button("SALVAR");
         salvar.setOnAction(e->{
             if(!cidadeLabel.getText().isEmpty() && !cepLabel.getText().isEmpty()) {
-                if (Cliente.validarCpf(cepLabel.getText())) {
-                    ClienteService service = new ClienteService();
+                if (Imovel.validarCpf(cepLabel.getText())) {
+                    ImovelService service = new ImovelService();
                     service.add(cidadeField.getText(), cepField.getText(),
                             ufField.getText(), precoField.getText());
-                    formCliente.close();
+                    formImovel.close();
                 }else mostrarAlerta("Erro", "CPF inválido!");;
             }else {
                 mostrarAlerta("Erro", "O campo nome e cpf são obrigatórios!");
@@ -224,21 +276,21 @@ private void formAddImovel(Stage principalStage){
         gridForm.add(salvar,2, 4);
 
 
-        formCliente.setScene(scene);
+        formImovel.setScene(scene);
 
-        formCliente.initOwner(principalStage);
-        formCliente.initModality(Modality.APPLICATION_MODAL);
+        formImovel.initOwner(principalStage);
+        formImovel.initModality(Modality.APPLICATION_MODAL);
 
-        formCliente.showAndWait();
+        formImovel.showAndWait();
     }
 
     private GridPane listaImovelPage(Stage stage) {
         ImovelService service = new ImovelService();
         List<Imovel> imoveis = service.buscarTodos();
                List.of(
-                new Cliente("Francisco", "11570209928", "francisco@email.com", ""),
-                new Cliente("Maria", "", "maria@email.com", ""),
-                new Cliente("João", "", "joao@email.com", "")
+                new Imovel("Francisco", "11570209928", "francisco@email.com", ""),
+                new Imovel("Maria", "", "maria@email.com", ""),
+                new Imovel("João", "", "joao@email.com", "")
         );
 
 VBox vbox = new VBox(10);
@@ -254,8 +306,8 @@ HBox imovelBox = new HBox(20);
             Label nomeLabel = new Label(imovel.getNome());
             Label emailLabel = new Label(imovel.getEmail());
 
-            clienteBox.getChildren().addAll(nomeLabel, emailLabel);
-            vbox.getChildren().add(clienteBox);
+            imovelBox.getChildren().addAll(nomeLabel, emailLabel);
+            vbox.getChildren().add(imovelBox);
         }
 
 ScrollPane scrollPane = new ScrollPane(vbox);
