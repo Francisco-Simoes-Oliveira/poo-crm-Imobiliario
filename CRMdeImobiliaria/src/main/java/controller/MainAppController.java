@@ -25,11 +25,6 @@ public class MainAppController extends BaseController implements Initializable {
     }
 
     @FXML
-    private void abrirImoveis() {
-        trocarTela("/sceneBuilder/ImoveisView.fxml");
-    }
-
-    @FXML
     private void abrirClientes() {
         trocarTela("/sceneBuilder/ClientesView.fxml");
     }

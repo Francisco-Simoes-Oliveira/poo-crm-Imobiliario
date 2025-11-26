@@ -10,7 +10,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import modelo.Cliente;
 import modelo.Imovel;
 import service.ImovelService;
 
@@ -39,6 +38,7 @@ public class ImovelController extends BaseController {
     private TableColumn<Imovel, Void> colunaInfo;
     @FXML
     private TableColumn<Imovel, Void> colunaAcoes;
+
 
     @FXML
     public void initialize() {

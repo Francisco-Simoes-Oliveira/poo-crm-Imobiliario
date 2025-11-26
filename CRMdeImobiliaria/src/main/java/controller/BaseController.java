@@ -41,4 +41,9 @@ public abstract class BaseController {
     private void abrirConfiguracao() {
         trocarTela("/sceneBuilder/ConfiguracaoView.fxml");
     }
+
+    @FXML
+    private void abrirImoveis() {
+        trocarTela("/sceneBuilder/ImovelView.fxml");
+    }
 }
