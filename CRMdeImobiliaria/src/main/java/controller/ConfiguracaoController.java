@@ -2,15 +2,16 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import modelo.Cargo;
-import modelo.Cliente;
-import modelo.Funcionario;
-import modelo.Imovel;
+import modelo.*;
+import org.json.JSONObject;
 import service.CargoService;
 import service.FuncionarioService;
 import service.ImovelService;
 import util.JsonImporter;
 import service.ClienteService;
+
+import com.github.javafaker.Faker;
+
 
 import java.util.List;
 
@@ -19,9 +20,13 @@ public class ConfiguracaoController {
     @FXML
     private Button clienteJson;
 
+    private final Faker faker = new Faker();
+
 
     public void prencherBanco(){
+
         ClienteService serviceCliente = new ClienteService();
+
         ImovelService serviceImovel = new ImovelService();
         FuncionarioService serviceFunc = new FuncionarioService();
         CargoService cargoService = new CargoService();
@@ -56,5 +61,96 @@ public class ConfiguracaoController {
         } else {
             System.out.println("ERRO: Banco de imóveis já está populado");
         }
+    }
+
+    public void gerarClientes(int quantidade) {
+        ClienteService serviceCliente = new ClienteService();
+
+        for (int i = 0; i < quantidade; i++) {
+
+            String nome = faker.name().fullName();
+            String cpf = faker.number().digits(11);
+            String email = faker.internet().emailAddress();
+            String telefone = faker.phoneNumber().phoneNumber();
+
+            Cliente c = new Cliente(nome, cpf, email, telefone);
+
+            serviceCliente.add(c);
+
+            if (i % 1000 == 0) {
+                System.out.println("Inseridos: " + i);
+            }
+        }
+    }
+
+    public void gerarFuncionario(int quantidade) {
+        FuncionarioService serviceFunc = new FuncionarioService();
+        CargoService cargoService = new CargoService();
+
+        for (int i = 0; i < quantidade; i++) {
+
+            String nome = faker.name().fullName();
+            String cpf = faker.number().digits(11);
+            String email = faker.internet().emailAddress();
+            String telefone = faker.phoneNumber().phoneNumber();
+
+            Funcionario f = new Funcionario(nome, cpf, email, telefone, cargoService.buscaPorId(2L));
+
+            serviceFunc.add(f);
+
+            if (i % 1000 == 0) {
+                System.out.println("Inseridos: " + i);
+            }
+        }
+    }
+
+    public void gerarImoveis(int qtd) {
+        ImovelService imovelService = new ImovelService();
+        FuncionarioService funcService = new FuncionarioService();
+
+        String[] cepsValidos = {
+                "01001-000", "01310-200", "22250-040",
+                "30110-012", "69005-070", "40020-000"
+        };
+        for (int i = 0; i < qtd; i++) {
+
+            String cep = cepsValidos[faker.number().numberBetween(0, cepsValidos.length)];
+            JSONObject json = Endereco.buscaViaCep(cep);
+
+            Endereco end = new Endereco(
+                    cep,
+                    json.getString("logradouro"),
+                    json.getString("bairro"),
+                    json.getString("localidade"),
+                    json.getString("uf"),
+                    faker.number().numberBetween(1, 9999) + "",
+                    faker.lorem().sentence()
+            );
+
+            Comodos com = new Comodos(
+                    faker.number().numberBetween(1, 5),
+                    faker.number().numberBetween(1, 3),
+                    faker.number().numberBetween(1, 2),
+                    faker.number().numberBetween(1, 2),
+                    faker.number().numberBetween(0, 2),
+                    faker.number().numberBetween(1, 2)
+            );
+
+            StatusImovel status = StatusImovel.values()
+                    [faker.number().numberBetween(0, StatusImovel.values().length)];
+
+            Funcionario funcionario = funcService.buscaPorId(
+                    faker.number().numberBetween(1L, 10L)); // exemplo
+
+            Imovel im = new Imovel(end,
+                    faker.number().randomDouble(2, 100000, 1000000),
+                    com,
+                    status,
+                    funcionario);
+
+            imovelService.add(im);
+        }
+
+        System.out.println("Imóveis gerados: " + qtd);
     }
 }
