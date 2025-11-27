@@ -5,11 +5,23 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ConfiguracaoController">
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" />
-            <HBox prefHeight="100.0" prefWidth="200.0" />
-            <HBox prefHeight="100.0" prefWidth="200.0" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Clienter" />
+                  <TextField fx:id="clienteField" />
+               </children></HBox>
+            <HBox fx:id="funcionarioclienteField" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Funcionario" />
+                  <TextField fx:id="funcionarioField" />
+               </children></HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Imovel" />
+                  <TextField fx:id="imovelField" />
+               </children></HBox>
             <Button fx:id="clienteJson" mnemonicParsing="false" onAction="#prencherBanco" text="E isso" />
          </children>
       </VBox>

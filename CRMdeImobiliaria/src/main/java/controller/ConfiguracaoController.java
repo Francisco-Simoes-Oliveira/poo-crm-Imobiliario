@@ -2,6 +2,7 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import modelo.*;
 import org.json.JSONObject;
 import service.CargoService;
@@ -17,14 +18,41 @@ import java.util.List;
 
 public class ConfiguracaoController {
 
-    @FXML
-    private Button clienteJson;
+    @FXML private Button clienteJson;
+
+    @FXML private TextField clienteField;
+    @FXML private TextField funcionarioField;
+    @FXML private TextField imovelField;
 
     private final Faker faker = new Faker();
+
+    public void initialize() {
+        clienteField.textProperty().addListener((obs, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                clienteField.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+        funcionarioField.textProperty().addListener((obs, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                funcionarioField.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+        imovelField.textProperty().addListener((obs, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                imovelField.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+    }
+
 
 
     public void prencherBanco(){
 
+        gerarClientes(Integer.parseInt(clienteField.getText()));
+        gerarFuncionario(Integer.parseInt(funcionarioField.getText()));
+        gerarImoveis(Integer.parseInt(imovelField.getText()));
+
+        /*
         ClienteService serviceCliente = new ClienteService();
 
         ImovelService serviceImovel = new ImovelService();
@@ -60,8 +88,9 @@ public class ConfiguracaoController {
             System.out.println("Banco de imóveis populado com dados do JSON!");
         } else {
             System.out.println("ERRO: Banco de imóveis já está populado");
-        }
+        }*/
     }
+
 
     public void gerarClientes(int quantidade) {
         ClienteService serviceCliente = new ClienteService();
@@ -71,7 +100,7 @@ public class ConfiguracaoController {
             String nome = faker.name().fullName();
             String cpf = faker.number().digits(11);
             String email = faker.internet().emailAddress();
-            String telefone = faker.phoneNumber().phoneNumber();
+            String telefone = faker.phoneNumber().cellPhone().replaceAll("[^0-9]", "");
 
             Cliente c = new Cliente(nome, cpf, email, telefone);
 
@@ -92,7 +121,7 @@ public class ConfiguracaoController {
             String nome = faker.name().fullName();
             String cpf = faker.number().digits(11);
             String email = faker.internet().emailAddress();
-            String telefone = faker.phoneNumber().phoneNumber();
+            String telefone = faker.phoneNumber().cellPhone().replaceAll("[^0-9]", "");
 
             Funcionario f = new Funcionario(nome, cpf, email, telefone, cargoService.buscaPorId(2L));
 
@@ -153,4 +182,7 @@ public class ConfiguracaoController {
 
         System.out.println("Imóveis gerados: " + qtd);
     }
+
+
+
 }
