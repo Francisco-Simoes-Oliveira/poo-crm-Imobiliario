@@ -49,8 +49,6 @@ public class ImovelController extends BaseController {
         colunaId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colunaLogradoro.setCellValueFactory(new PropertyValueFactory<>("logradoro"));
         colunaStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-        colunaImg.setCellValueFactory(new PropertyValueFactory<>("img"));
-        colunaInfo.setCellValueFactory(new PropertyValueFactory<>("info"));
 
         // 2️⃣ Define tamanhos preferenciais (servem como "proporções")
         colunaId.setPrefWidth(60);
@@ -203,12 +201,12 @@ public class ImovelController extends BaseController {
             if (termo.isEmpty()) return true;
 
             switch (filtro) {
-                case "Logradouro":
-                    return imovel.getEndereco().getLogradouro().toLowerCase().contains(termo);
+                case "Logradoro":
+                    return imovel.getEndereco().getLogradoro().toLowerCase().contains(termo);
                 case "CEP":
                     return imovel.getEndereco().getCep().contains(termo);
                 case "Status":
-                    return imovel.getStatusImovel().toString().toLowerCase().contains(termo);
+                    return imovel.getStatus().toString().toLowerCase().contains(termo);
                 default:
                     return false;
             }

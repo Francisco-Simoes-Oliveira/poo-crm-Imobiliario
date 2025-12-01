@@ -14,8 +14,6 @@ import service.ClienteService;
 import com.github.javafaker.Faker;
 
 
-import java.util.List;
-
 public class ConfiguracaoController {
 
     @FXML private Button clienteJson;
@@ -138,13 +136,25 @@ public class ConfiguracaoController {
         FuncionarioService funcService = new FuncionarioService();
 
         String[] cepsValidos = {
-                "01001-000", "01310-200", "22250-040",
-                "30110-012", "69005-070", "40020-000"
+                "01001-000", "01025-020", "01311-000",
+                "02047-000", "04538-132", "05001-900",
+                "20031-170", "20230-021", "22230-010",
+                "22250-040", "30130-010", "30160-011",
+                "30310-150", "40020-000", "40100-110",
+                "40301-155", "80010-010", "80060-000",
+                "60060-440", "60125-100", "69005-070",
+                "69020-010", "90010-140", "90035-003"
         };
         for (int i = 0; i < qtd; i++) {
 
             String cep = cepsValidos[faker.number().numberBetween(0, cepsValidos.length)];
             JSONObject json = Endereco.buscaViaCep(cep);
+
+            if (json == null || json.has("erro")) {
+                System.out.println("CEP inválido: " + cep);
+                i--;
+                continue;
+            }
 
             Endereco end = new Endereco(
                     cep,

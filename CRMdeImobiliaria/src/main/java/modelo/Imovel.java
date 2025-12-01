@@ -60,11 +60,11 @@ public class Imovel {
         this.comodos = comodos;
     }
 
-    public StatusImovel getStatusImovel() {
+    public StatusImovel getStatus() {
         return statusImovel;
     }
 
-    public void setStatusImovel(StatusImovel statusImovel) {
+    public void setStatus(StatusImovel statusImovel) {
         this.statusImovel = statusImovel;
     }
 
@@ -76,6 +76,11 @@ public class Imovel {
         this.endereco = endereco;
     }
 
+    public String getLogradoro(){
+        if (endereco== null)return "";
+        return endereco.getLogradoro();
+    }
+
     public Funcionario getFuncionario() {
         return funcionario;
     }
@@ -83,4 +88,5 @@ public class Imovel {
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
     }
+
 }

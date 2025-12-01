@@ -35,7 +35,7 @@ public class FormImovelController {
         // Preenche os campos de texto normalmente
         nomeCidadeField.setText(imovel.getEndereco().getCidade());
         cepField.setText(imovel.getEndereco().getCep());
-        logradouroField.setText(imovel.getEndereco().getLogradouro());
+        logradouroField.setText(imovel.getEndereco().getLogradoro());
         ufField.setText(imovel.getEndereco().getUf());
         numeroField.setText(imovel.getEndereco().getNumero());
         complementoField.setText(imovel.getEndereco().getComplemento());
