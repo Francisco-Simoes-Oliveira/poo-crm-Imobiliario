@@ -1,9 +1,13 @@
 package controller;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import modelo.Imovel;
 import modelo.Endereco;
@@ -14,6 +18,10 @@ import view.MainApp;
 
 public class FormImovelController {
     private ImovelService service = new ImovelService();
+
+    @FXML private VBox telaEndereco;
+    @FXML private VBox telaComodos;
+    @FXML private VBox telaInformacoes;
 
     @FXML private TextField nomeCidadeField;
     @FXML private TextField cepField;
@@ -45,6 +53,34 @@ public class FormImovelController {
     private void buscaCep(){
         JSONObject obj = Endereco.buscaViaCep(cepField.getText());
         nomeCidadeField.setText(obj.getString("localidade"));
+    }
+
+
+    @FXML
+    private void trocarTela(ActionEvent event) {
+        Button btn = (Button) event.getSource();
+
+        switch (btn.getId()) {
+            case "btnEndereco":
+                mostrarTela(enderecoPane);
+                break;
+
+            case "btnComodos":
+                mostrarTela(comodosPane);
+                break;
+
+            case "btnInformacoes":
+                mostrarTela(infoPane);
+                break;
+        }
+    }
+
+    private void mostrarTela(Node tela) {
+        telaEndereco.setVisible(false);
+        telaComodos.setVisible(false);
+        telaInformacoes.setVisible(false);
+
+        tela.setVisible(true);
     }
 
 /*
