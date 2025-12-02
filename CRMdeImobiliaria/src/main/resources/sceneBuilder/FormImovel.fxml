@@ -5,6 +5,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FormImovelController">
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -238,7 +240,38 @@
                          </Label>
                      </children></HBox>
                  <Separator prefWidth="200.0" />
-                 <HBox prefHeight="75.0" prefWidth="200.0" />
+                 <HBox alignment="CENTER" prefHeight="75.0" prefWidth="200.0" spacing="25.0">
+                  <children>
+                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                        <children>
+                           <Label text="Preço">
+                              <font>
+                                 <Font name="Arial" size="14.0" />
+                              </font>
+                           </Label>
+                           <TextField prefHeight="26.0" prefWidth="102.0" />
+                        </children>
+                     </HBox>
+                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                        <children>
+                           <Label text="Label">
+                              <font>
+                                 <Font name="Arial" size="14.0" />
+                              </font>
+                           </Label>
+                            <ChoiceBox prefHeight="26.0" prefWidth="102.0" >
+                                <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                        <String fx:value="DISPONIVEL"/>
+                                        <String fx:value="NEGOCIAÇÃO"/>
+                                        <String fx:value="VENDIDO"/>
+                                        <String fx:value="ALUGADO"/>
+                                    </FXCollections>
+                                </items>
+                            </ChoiceBox>
+                        </children>
+                     </HBox>
+                  </children></HBox>
 
 
                  <HBox alignment="CENTER" prefHeight="75.0" prefWidth="200.0" spacing="50.0">
