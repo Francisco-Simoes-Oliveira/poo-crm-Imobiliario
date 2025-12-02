@@ -105,7 +105,7 @@
                      </Label>
                  </children></HBox>
              <Separator prefWidth="200.0" />
-                <HBox prefHeight="100.0" prefWidth="200.0">
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Label text="Quarto">
@@ -113,9 +113,30 @@
                               <Font name="Arial" size="16.0" />
                            </font>
                         </Label>
-                         <Spinner prefHeight="25.0" prefWidth="72.0" />
-                     </children></HBox>
-                    <HBox prefHeight="100.0" prefWidth="200.0" />
+                         <Spinner fx:id="spinnerQuarto" editable="true" prefHeight="25.0" prefWidth="72.0">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></Spinner>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                        <children>
+                            <Label text="Sala">
+                                <font>
+                                    <Font name="Arial" size="16.0" />
+                                </font>
+                            </Label>
+                            <Spinner fx:id="spinnerSala" editable="true" prefHeight="25.0" prefWidth="72.0">
+                                <HBox.margin>
+                                    <Insets left="10.0" />
+                                </HBox.margin></Spinner>
+                        </children>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin></HBox>
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <VBox prefHeight="200.0" prefWidth="100.0" />

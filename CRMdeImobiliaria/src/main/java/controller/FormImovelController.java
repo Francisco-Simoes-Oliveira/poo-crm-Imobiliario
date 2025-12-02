@@ -4,9 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -31,18 +29,22 @@ public class FormImovelController {
     @FXML private TextField numeroField;
     @FXML private TextField complementoField;
 
-
-    @FXML private HBox foot1;
-    @FXML private HBox foot2;
-    @FXML private HBox foot3;
-
-
+    @FXML private Spinner spinnerQuarto;
+    @FXML private Spinner spinnerSala;
 
     private Imovel imovelAtual;
     private ObservableList<Imovel> imovelsObservable;
 
     public void initialize(){
         mostrarTela(telaEndereco);
+
+        spinnerQuarto.setValueFactory(
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, 1)
+        );
+        spinnerSala.setValueFactory(
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, 1)
+        );
+
     }
 
 
