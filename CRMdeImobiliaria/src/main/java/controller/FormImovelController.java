@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import modelo.Imovel;
@@ -31,9 +32,19 @@ public class FormImovelController {
     @FXML private TextField complementoField;
 
 
+    @FXML private HBox foot1;
+    @FXML private HBox foot2;
+    @FXML private HBox foot3;
+
+
 
     private Imovel imovelAtual;
     private ObservableList<Imovel> imovelsObservable;
+
+    public void initialize(){
+        mostrarTela(telaEndereco);
+    }
+
 
     public void setImovelsObservable(ObservableList<Imovel> imovelsObservable) {
         this.imovelsObservable = imovelsObservable;
@@ -57,31 +68,39 @@ public class FormImovelController {
 
 
     @FXML
-    private void trocarTela(ActionEvent event) {
-        Button btn = (Button) event.getSource();
+    private void trocarTela(ActionEvent e) {
 
-        switch (btn.getId()) {
-            case "btnEndereco":
-                mostrarTela(telaEndereco);
-                break;
+        String tela = ((Button)e.getSource()).getUserData().toString();
 
-            case "btnComodos":
-                mostrarTela(telaComodos);
-                break;
+        mostrarTela(telaEndereco);
+        mostrarTela(telaComodos);
+        mostrarTela(telaInformacoes);
 
-            case "btnInformacoes":
-                mostrarTela(telaInformacoes);
-                break;
+        switch (tela){
+            case "endereco": mostrarTela(telaEndereco); break;
+            case "comodos": mostrarTela(telaComodos); break;
+            case "info":    mostrarTela(telaInformacoes); break;
         }
     }
 
     private void mostrarTela(Node tela) {
         telaEndereco.setVisible(false);
+        telaEndereco.setManaged(false);
+        telaEndereco.setMouseTransparent(true);
+
         telaComodos.setVisible(false);
+        telaComodos.setManaged(false);
+        telaComodos.setMouseTransparent(true);
+
         telaInformacoes.setVisible(false);
+        telaInformacoes.setManaged(false);
+        telaInformacoes.setMouseTransparent(true);
 
         tela.setVisible(true);
+        tela.setManaged(true);
+        tela.setMouseTransparent(false);
     }
+
 
 /*
     @FXML
