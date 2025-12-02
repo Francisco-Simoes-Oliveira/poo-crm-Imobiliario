@@ -62,15 +62,15 @@ public class FormImovelController {
 
         switch (btn.getId()) {
             case "btnEndereco":
-                mostrarTela(enderecoPane);
+                mostrarTela(telaEndereco);
                 break;
 
             case "btnComodos":
-                mostrarTela(comodosPane);
+                mostrarTela(telaComodos);
                 break;
 
             case "btnInformacoes":
-                mostrarTela(infoPane);
+                mostrarTela(telaInformacoes);
                 break;
         }
     }
