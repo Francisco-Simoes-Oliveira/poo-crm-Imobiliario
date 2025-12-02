@@ -48,20 +48,28 @@ public class Comodos{
         this.banheiro = banheiro;
     }
 
-    public int getcozinha() {
-        return cozinha;
-    }
-
-    public void setcozinha(int cozinha) {
-        this.cozinha = cozinha;
-    }
-
     public int getSala() {
         return sala;
     }
 
     public void setSala(int sala) {
         this.sala = sala;
+    }
+
+    public int getCozinha() {
+        return cozinha;
+    }
+
+    public void setCozinha(int cozinha) {
+        this.cozinha = cozinha;
+    }
+
+    public int getLavanderia() {
+        return lavanderia;
+    }
+
+    public void setLavanderia(int lavanderia) {
+        this.lavanderia = lavanderia;
     }
 
     public int getGaragem() {

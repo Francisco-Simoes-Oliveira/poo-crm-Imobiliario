@@ -31,6 +31,10 @@ public class FormImovelController {
 
     @FXML private Spinner spinnerQuarto;
     @FXML private Spinner spinnerSala;
+    @FXML private Spinner spinnerBanheiro;
+    @FXML private Spinner spinnerCozinha;
+    @FXML private Spinner spinnerLavanderia;
+    @FXML private Spinner spinnerGaragem;
 
     private Imovel imovelAtual;
     private ObservableList<Imovel> imovelsObservable;
@@ -43,6 +47,18 @@ public class FormImovelController {
         );
         spinnerSala.setValueFactory(
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, 1)
+        );
+        spinnerBanheiro.setValueFactory(
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, 1)
+        );
+        spinnerCozinha.setValueFactory(
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, 1)
+        );
+        spinnerLavanderia.setValueFactory(
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, 1)
+        );
+        spinnerGaragem.setValueFactory(
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, 0)
         );
 
     }

@@ -105,7 +105,7 @@
                      </Label>
                  </children></HBox>
              <Separator prefWidth="200.0" />
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Label text="Quarto">
@@ -132,16 +132,84 @@
                             <Spinner fx:id="spinnerSala" editable="true" prefHeight="25.0" prefWidth="72.0">
                                 <HBox.margin>
                                     <Insets left="10.0" />
-                                </HBox.margin></Spinner>
+                                </HBox.margin>
+                            </Spinner>
                         </children>
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin></HBox>
+
+                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                        <children>
+                            <Label text="Banheiro">
+                                <font>
+                                    <Font name="Arial" size="16.0" />
+                                </font>
+                            </Label>
+                            <Spinner fx:id="spinnerBanheiro" editable="true" prefHeight="25.0" prefWidth="72.0">
+                                <HBox.margin>
+                                    <Insets left="10.0" />
+                                </HBox.margin>
+                            </Spinner>
+                        </children>
+                        <HBox.margin>
+                            <Insets left="20.0" />
+                        </HBox.margin></HBox>
+
                 </HBox>
-                <HBox prefHeight="100.0" prefWidth="200.0">
-                    <VBox prefHeight="200.0" prefWidth="100.0" />
-                    <VBox prefHeight="200.0" prefWidth="100.0" />
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                        <children>
+                            <Label text="Cozinha">
+                                <font>
+                                    <Font name="Arial" size="16.0" />
+                                </font>
+                            </Label>
+                            <Spinner fx:id="spinnerCozinha" editable="true" prefHeight="25.0" prefWidth="72.0">
+                                <HBox.margin>
+                                    <Insets left="10.0" />
+                                </HBox.margin></Spinner>
+                        </children>
+                        <HBox.margin>
+                            <Insets left="20.0" />
+                        </HBox.margin>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                        <children>
+                            <Label text="Lavanderia">
+                                <font>
+                                    <Font name="Arial" size="16.0" />
+                                </font>
+                            </Label>
+                            <Spinner fx:id="spinnerLavanderia" editable="true" prefHeight="25.0" prefWidth="72.0">
+                                <HBox.margin>
+                                    <Insets left="10.0" />
+                                </HBox.margin>
+                            </Spinner>
+                        </children>
+                        <HBox.margin>
+                            <Insets left="20.0" />
+                        </HBox.margin></HBox>
+
+                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                        <children>
+                            <Label text="Garagem">
+                                <font>
+                                    <Font name="Arial" size="16.0" />
+                                </font>
+                            </Label>
+                            <Spinner fx:id="spinnerGaragem" editable="true" prefHeight="25.0" prefWidth="72.0">
+                                <HBox.margin>
+                                    <Insets left="10.0" />
+                                </HBox.margin>
+                            </Spinner>
+                        </children>
+                        <HBox.margin>
+                            <Insets left="20.0" />
+                        </HBox.margin></HBox>
+
                 </HBox>
+
 
 
                 <HBox alignment="CENTER" prefHeight="75.0" prefWidth="200.0" spacing="50.0">
