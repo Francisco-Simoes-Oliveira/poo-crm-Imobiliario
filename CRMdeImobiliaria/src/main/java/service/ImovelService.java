@@ -14,8 +14,9 @@ public class ImovelService extends ServiceImplementacao<ImovelDao,Imovel,Long> {
         super(ImovelDao.class);
     }
 
-    public void add(Imovel imovel){
+    public Imovel add(Imovel imovel){
         dao.add(imovel);
+        return imovel;
     }
     public void add(Endereco endereco, Double preco, Comodos comodos, StatusImovel statusImovel, Funcionario funcionario){
         Imovel Imovel = new Imovel(endereco,preco,comodos, statusImovel, funcionario);
