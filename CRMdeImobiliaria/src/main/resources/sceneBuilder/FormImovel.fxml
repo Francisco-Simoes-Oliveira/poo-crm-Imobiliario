@@ -105,13 +105,21 @@
                      </Label>
                  </children></HBox>
              <Separator prefWidth="200.0" />
-                <HBox prefHeight="100.0" prefWidth="200.0" >
-                    <VBox>
-                    </VBox>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Quarto">
+                           <font>
+                              <Font name="Arial" size="16.0" />
+                           </font>
+                        </Label>
+                         <Spinner prefHeight="25.0" prefWidth="72.0" />
+                     </children></HBox>
+                    <HBox prefHeight="100.0" prefWidth="200.0" />
                 </HBox>
-                <HBox prefHeight="100.0" prefWidth="200.0" >
-                    <VBox>
-                    </VBox>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <VBox prefHeight="200.0" prefWidth="100.0" />
+                    <VBox prefHeight="200.0" prefWidth="100.0" />
                 </HBox>
 
 
