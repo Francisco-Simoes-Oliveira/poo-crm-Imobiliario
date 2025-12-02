@@ -5,15 +5,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import javafx.stage.FileChooser;
 import modelo.Imovel;
 import modelo.Endereco;
-import modelo.StatusPessoa;
 import org.json.JSONObject;
 import service.ImovelService;
-import view.MainApp;
+
+import java.io.File;
 
 public class FormImovelController {
     private ImovelService service = new ImovelService();
@@ -118,6 +119,34 @@ public class FormImovelController {
         tela.setManaged(true);
         tela.setMouseTransparent(false);
     }
+
+    @FXML
+    private ImageView imagePreview;
+
+    private File imagemSelecionada;
+
+    @FXML
+    private void selecionarImagem(ActionEvent event) {
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Selecionar Imagem do Imóvel");
+
+        // filtros de arquivos
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Imagens", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        // abre a janela
+        File file = fileChooser.showOpenDialog(null);
+
+        if (file != null) {
+            imagemSelecionada = file;
+
+            // mostra no preview
+            imagePreview.setImage(new Image(file.toURI().toString()));
+        }
+    }
+
 
 
 /*
