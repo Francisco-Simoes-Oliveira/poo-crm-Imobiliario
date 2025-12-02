@@ -20,7 +20,7 @@ public abstract class ServiceImplementacao<DAO extends DaoGenerico<T, ID>, T, ID
         }
     }
 
-    public void add(T objeto){
+    public T add(T objeto){
         dao.add(objeto);
     }
     public void add(List<T> objetos){

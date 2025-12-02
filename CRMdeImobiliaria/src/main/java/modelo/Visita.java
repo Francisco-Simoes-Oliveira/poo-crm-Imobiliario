@@ -43,4 +43,56 @@ public class Visita {
         this.statosVisita = statosVisita;
         this.observacao = observacao;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public Imovel getImovel() {
+        return imovel;
+    }
+
+    public void setImovel(Imovel imovel) {
+        this.imovel = imovel;
+    }
+
+    public LocalDateTime getHorarioVisita() {
+        return horarioVisita;
+    }
+
+    public void setHorarioVisita(LocalDateTime horarioVisita) {
+        this.horarioVisita = horarioVisita;
+    }
+
+    public StatusVisita getStatosVisita() {
+        return statosVisita;
+    }
+
+    public void setStatosVisita(StatusVisita statosVisita) {
+        this.statosVisita = statosVisita;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
 }
