@@ -27,7 +27,7 @@ public class Visita {
     private LocalDateTime horarioVisita;
 
     @Enumerated(EnumType.STRING)
-    private StatusVisita statosVisita;
+    private StatusVisita statos;
 
     @Column(length = 350)
     private String observacao;
@@ -35,12 +35,12 @@ public class Visita {
     public Visita() {
     }
 
-    public Visita(Cliente cliente, Funcionario funcionario, Imovel imovel, LocalDateTime horarioVisita, StatusVisita statosVisita, String observacao) {
+    public Visita(Cliente cliente, Funcionario funcionario, Imovel imovel, LocalDateTime horarioVisita, StatusVisita statos, String observacao) {
         this.cliente = cliente;
         this.funcionario = funcionario;
         this.imovel = imovel;
         this.horarioVisita = horarioVisita;
-        this.statosVisita = statosVisita;
+        this.statos = statos;
         this.observacao = observacao;
     }
 
@@ -81,11 +81,11 @@ public class Visita {
     }
 
     public StatusVisita getStatosVisita() {
-        return statosVisita;
+        return statos;
     }
 
-    public void setStatosVisita(StatusVisita statosVisita) {
-        this.statosVisita = statosVisita;
+    public void setStatosVisita(StatusVisita statos) {
+        this.statos = statos;
     }
 
     public String getObservacao() {

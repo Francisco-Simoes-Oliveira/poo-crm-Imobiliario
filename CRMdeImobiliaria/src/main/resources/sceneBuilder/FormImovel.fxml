@@ -85,7 +85,7 @@
                         <Button mnemonicParsing="false" onAction="#trocarTela" style="-fx-background-color: #329FF0;" text="Endereço" userData="endereco" />
                         <Button mnemonicParsing="false" onAction="#trocarTela" text="Comodos" userData="comodos" />
                         <Button mnemonicParsing="false" onAction="#trocarTela" text="Informaçoes" userData="info" />
-                        <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="74.0" style="-fx-background-color: #40CF2D; -fx-border-color: black;" text="Salvar">
+                        <Button mnemonicParsing="false" onAction="#salvar" prefHeight="33.0" prefWidth="74.0" style="-fx-background-color: #40CF2D; -fx-border-color: black;" text="Salvar">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
@@ -219,7 +219,7 @@
                         <Button mnemonicParsing="false" onAction="#trocarTela" style="-fx-background-color: #329FF0;" text="Endereço" userData="endereco" />
                         <Button mnemonicParsing="false" onAction="#trocarTela" text="Comodos" userData="comodos" />
                         <Button mnemonicParsing="false" onAction="#trocarTela" text="Informaçoes" userData="info" />
-                        <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="74.0" style="-fx-background-color: #40CF2D; -fx-border-color: black;" text="Salvar">
+                        <Button mnemonicParsing="false" onAction="#salvar" prefHeight="33.0" prefWidth="74.0" style="-fx-background-color: #40CF2D; -fx-border-color: black;" text="Salvar">
                             <HBox.margin>
                                 <Insets right="20.0" />
                             </HBox.margin>
@@ -308,7 +308,7 @@
                          <Button mnemonicParsing="false" onAction="#trocarTela" text="Endereço" userData="endereco" />
                          <Button mnemonicParsing="false" onAction="#trocarTela" text="Comodos" userData="comodos" />
                          <Button mnemonicParsing="false" onAction="#trocarTela" style="-fx-background-color: #329FF0;" text="Informaçoes" userData="info" />
-                         <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="74.0" style="-fx-background-color: #40CF2D; -fx-border-color: black;" text="Salvar">
+                         <Button mnemonicParsing="false" onAction="#salvar" prefHeight="33.0" prefWidth="74.0" style="-fx-background-color: #40CF2D; -fx-border-color: black;" text="Salvar">
                              <HBox.margin>
                                  <Insets right="20.0" />
                              </HBox.margin>

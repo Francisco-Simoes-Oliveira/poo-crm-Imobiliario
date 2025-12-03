@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="root" stylesheets="@/css/clienteStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ImovelController">
+<BorderPane fx:id="root" stylesheets="@/css/clienteStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VisitaController">
     <top>
         <VBox spacing="20.0" BorderPane.alignment="CENTER">
             <padding>
@@ -16,7 +16,7 @@
 
             <!-- Título e botão-->
             <HBox alignment="CENTER_LEFT" spacing="10.0">
-                <Label styleClass="section-title" text="Imoveis">
+                <Label styleClass="section-title" text="Visita">
                     <font>
                         <Font name="Arial Black" size="15.0" />
                     </font></Label>
@@ -26,28 +26,29 @@
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Logradouro" />
                             <String fx:value="CEP" />
+                            <String fx:value="Cliente" />
                             <String fx:value="Status" />
                         </FXCollections>
                     </items>
                 </ComboBox>
                 <HBox alignment="CENTER_LEFT" spacing="10">
-                    <TextField fx:id="campoPesquisa" prefHeight="35.0" prefWidth="185.0" promptText="Pesquisar Imovel...">
+                    <TextField fx:id="campoPesquisa" prefHeight="35.0" prefWidth="185.0" promptText="Pesquisar Visita...">
                         <font>
                             <Font size="14.0" />
                         </font></TextField>
                 </HBox>
                 <Pane HBox.hgrow="ALWAYS" />
-                <Button onAction="#abrirNovoImovelModal" styleClass="primary-button" text="➕ Novo Imovel" />
+                <Button onAction="#abrirNovoVisitaModal" styleClass="primary-button" text="➕ Nova Visita" />
             </HBox>
 
             <!-- Tabela de Clientes-->
-            <TableView fx:id="tabelaImovels" prefHeight="400" prefWidth="800.0">
+            <TableView fx:id="tabelaVisitas" prefHeight="400" prefWidth="800.0">
                 <columns>
-                    <TableColumn fx:id="colunaId" prefWidth="83.0" text="Id" />
-                    <TableColumn fx:id="colunaLogradoro" prefWidth="316.0" text="Logradoro" />
-                    <TableColumn fx:id="colunaStatus" prefWidth="144.0" text="Status" />
-               <TableColumn fx:id="colunaImg" prefWidth="84.0" text="Imagens" />
-               <TableColumn fx:id="colunaInfo" prefWidth="85.0" text="Info" />
+                    <TableColumn fx:id="colunaId" prefWidth="70.19999694824219" text="Id" />
+                    <TableColumn fx:id="colunaLogradoro" prefWidth="275.3999938964844" text="Logradoro" />
+                    <TableColumn fx:id="colunaStatus" prefWidth="103.60000610351562" text="Status" />
+                    <TableColumn fx:id="colunaCliente" prefWidth="176.0" text="Cliente" />
+                    <TableColumn fx:id="colunaInfo" prefWidth="89.5999755859375" text="Info" />
                     <TableColumn fx:id="colunaAcoes" prefWidth="87.0" text="Ações" />
                 </columns>
             </TableView>

@@ -148,7 +148,30 @@ public class FormImovelController {
         numeroField.setText(imovel.getEndereco().getNumero());
         complementoField.setText(imovel.getEndereco().getComplemento());
 
+
+        spinnerQuarto.setValueFactory(
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, imovelAtual.getComodos().getQuarto())
+        );
+        spinnerSala.setValueFactory(
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, imovelAtual.getComodos().getSala())
+        );
+        spinnerBanheiro.setValueFactory(
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, imovelAtual.getComodos().getBanheiro())
+        );
+        spinnerCozinha.setValueFactory(
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, imovelAtual.getComodos().getCozinha())
+        );
+        spinnerLavanderia.setValueFactory(
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, imovelAtual.getComodos().getLavanderia())
+        );
+        spinnerGaragem.setValueFactory(
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, imovelAtual.getComodos().getGaragem())
+        );
+
         precoField.setText(imovel.getPreco().toString());
+        statusBox.setValue(imovel.getStatus().name());
+        campoFuncionario.setText(imovel.getFuncionario().getNome());
+
     }
 
     @FXML
@@ -221,22 +244,6 @@ public class FormImovelController {
             imagePreview.setImage(new Image(file.toURI().toString()));
         }
     }
-
-    /*
-    nomeCidadeField;
-    cepField;
-    logradouroField;
-    ufField;
-    numeroField;
-    complementoField;
-
-    spinnerQuarto;
-    spinnerSala;
-    spinnerBanheiro;
-    spinnerCozinha;
-    spinnerLavanderia;
-    spinnerGaragem;
-    */
 
 
     @FXML
