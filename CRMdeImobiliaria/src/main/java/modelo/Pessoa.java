@@ -90,4 +90,9 @@ public abstract class Pessoa {
     public void setStatus(StatusPessoa status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return this.nome; // ou getNome()
+    }
 }

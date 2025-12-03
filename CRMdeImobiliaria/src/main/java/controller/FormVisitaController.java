@@ -37,15 +37,20 @@ public class FormVisitaController {
 
 
     public void initialize() {
+        listaSugestoesFunc.setVisible(false);
+        listaSugestoesFunc.setManaged(false);
+        listaSugestoesCliente.setVisible(false);
+        listaSugestoesCliente.setManaged(false);
+
         FuncionarioService funcService = new FuncionarioService();
-        configurarAutocomplete(funcService);
+        configurarAutocompletef(funcService);
 
         ClienteService clienteService = new ClienteService();
-        configurarAutocomplete(clienteService);
+        configurarAutocompletec(clienteService);
 
     }
 
-    private void configurarAutocomplete(FuncionarioService funcService) {
+    private void configurarAutocompletef(FuncionarioService funcService) {
 
         listaFuncionarios = FXCollections.observableArrayList(funcService.buscarTodos());
 
@@ -81,7 +86,7 @@ public class FormVisitaController {
     }
 
 
-    private void configurarAutocomplete(ClienteService clienteService) {
+    private void configurarAutocompletec(ClienteService clienteService) {
 
         listaClientes = FXCollections.observableArrayList(clienteService.buscarTodos());
 
@@ -105,12 +110,12 @@ public class FormVisitaController {
             listaSugestoesCliente.setManaged(true);
         });
 
-        listaSugestoesFunc.setOnMouseClicked(ev -> {
+        listaSugestoesCliente.setOnMouseClicked(ev -> {
             Cliente c = listaSugestoesCliente.getSelectionModel().getSelectedItem();
             if (c != null) {
                 campoCliente.setText(c.getNome());
-                listaSugestoesFunc.setVisible(false);
-                listaSugestoesFunc.setManaged(false);
+                listaSugestoesCliente.setVisible(false);
+                listaSugestoesCliente.setManaged(false);
             }
         });
 
