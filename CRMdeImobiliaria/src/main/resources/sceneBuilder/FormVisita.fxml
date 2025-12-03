@@ -26,13 +26,12 @@
                 <Insets top="1.0" />
             </padding>
         </Separator>
-        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
          <children>
             <Label text="STATOS">
                <HBox.margin>
                   <Insets />
                </HBox.margin></Label>
-            <VBox prefHeight="200.0" prefWidth="100.0" />
              <ChoiceBox prefHeight="25.0" prefWidth="135.0">
                  <items>
                  <FXCollections fx:factory="observableArrayList">
@@ -47,50 +46,49 @@
             <Insets left="10.0" />
          </VBox.margin></HBox>
         <HBox alignment="CENTER" spacing="20.0">
-        <VBox prefHeight="101.0" prefWidth="215.0">
-            <children>
-                <Label text="NOME CLIENTE*" />
-                <TextField fx:id="campoCliente" promptText="👤 Nome Completo do Cliente" />
-                <ListView fx:id="listaSugestoesCliente" prefHeight="62.0" prefWidth="380.0" />
+            <VBox prefHeight="101.0" prefWidth="215.0">
+                <children>
+                    <Label text="NOME CLIENTE*" />
+                    <TextField fx:id="campoCliente" promptText="👤 Nome Completo do Cliente" />
+                    <ListView fx:id="listaSugestoesCliente" prefHeight="62.0" prefWidth="380.0" />
 
-            </children>
-            <VBox.margin>
-                <Insets left="10.0" right="10.0" />
-            </VBox.margin>
-        </VBox>
-        <VBox layoutX="10.0" layoutY="10.0" prefHeight="64.0" prefWidth="215.0">
-            <children>
-                <Label text="NOME FUNCIONARIO*" />
-                <TextField fx:id="campoFuncionario" prefHeight="25.0" prefWidth="204.0" promptText="👤 Nome Completo do Funcionario" />
-                <ListView fx:id="listaSugestoesFunc" prefHeight="59.0" prefWidth="219.0" />
-            </children>
-            <VBox.margin>
-                <Insets left="10.0" right="10.0" />
-            </VBox.margin>
-        </VBox>
+                </children>
+                <VBox.margin>
+                    <Insets left="10.0" right="10.0" />
+                </VBox.margin>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="10.0" prefHeight="64.0" prefWidth="215.0">
+                <children>
+                    <Label text="NOME FUNCIONARIO*" />
+                    <TextField fx:id="campoFuncionario" prefHeight="25.0" prefWidth="204.0" promptText="👤 Nome Completo do Funcionario" />
+                    <ListView fx:id="listaSugestoesFunc" prefHeight="59.0" prefWidth="219.0" />
+                </children>
+                <VBox.margin>
+                    <Insets left="10.0" right="10.0" />
+                </VBox.margin>
+            </VBox>
         </HBox>
-        <VBox layoutX="10.0" layoutY="210.0" prefHeight="131.0" prefWidth="380.0">
+        <HBox alignment="CENTER" prefHeight="109.0" prefWidth="514.0" spacing="20.0">
+        <VBox layoutX="10.0" layoutY="10.0" prefHeight="46.0" prefWidth="215.0">
             <children>
-                <Label text="DATA" />
-                <TextField fx:id="emailField" promptText="📧 email@exemplo.com" />
+                <Label text="Imovel*" />
+                <TextField fx:id="campoFuncionario" prefHeight="25.0" prefWidth="105.0" promptText="🏠Imovel" />
+                <ListView fx:id="listaSugestoesFunc" prefHeight="16.0" prefWidth="215.0" />
             </children>
             <VBox.margin>
                 <Insets left="10.0" right="10.0" />
             </VBox.margin>
         </VBox>
-        <VBox prefHeight="100.0" prefWidth="100.0">
+         <VBox prefHeight="44.0" prefWidth="215.0">
             <children>
-                <Label text="TELEFONE" />
-                <TextField fx:id="telefoneField" promptText="📞(00) 00000-0000">
-                    <VBox.margin>
-                        <Insets />
-                    </VBox.margin>
-                </TextField>
+                <Label text="Data e Hora*" />
+                <HBox spacing="5.0">
+               <DatePicker prefHeight="25.0" prefWidth="202.0" />
+                  <TextField promptText="Horas" />
+                </HBox>
             </children>
-            <VBox.margin>
-                <Insets left="10.0" right="10.0" />
-            </VBox.margin>
-        </VBox>
+         </VBox>
+        </HBox>
         <Separator prefWidth="200.0" />
         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
             <children>
@@ -113,5 +111,6 @@
                 </Button>
             </children>
         </HBox>
+      <TextField />
     </children>
 </VBox>
