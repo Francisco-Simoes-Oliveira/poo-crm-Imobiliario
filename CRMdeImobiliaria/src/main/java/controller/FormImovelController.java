@@ -1,6 +1,9 @@
 package controller;
 
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -9,12 +12,18 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.util.StringConverter;
+import modelo.Funcionario;
 import modelo.Imovel;
 import modelo.Endereco;
 import org.json.JSONObject;
+import service.FuncionarioService;
 import service.ImovelService;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FormImovelController {
     private ImovelService service = new ImovelService();
@@ -37,10 +46,21 @@ public class FormImovelController {
     @FXML private Spinner spinnerLavanderia;
     @FXML private Spinner spinnerGaragem;
 
+
+    @FXML private TextField campoFuncionario;
+    @FXML private ListView<Funcionario> listaSugestoes;
+    private ObservableList<Funcionario> listaFuncionarios;
+    @FXML private DatePicker data;
+
+
+
     private Imovel imovelAtual;
     private ObservableList<Imovel> imovelsObservable;
 
     public void initialize(){
+
+
+
         mostrarTela(telaEndereco);
 
         spinnerQuarto.setValueFactory(
@@ -62,7 +82,50 @@ public class FormImovelController {
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, 0)
         );
 
+        FuncionarioService funcService = new FuncionarioService();
+        listaFuncionarios = FXCollections.observableArrayList(funcService.buscarTodos());
+
+        configurarAutocomplete(funcService);
+
+       data.setValue(LocalDate.now());
+       data.setEditable(false);
+       data.setDisable(true);
     }
+    private void configurarAutocomplete(FuncionarioService funcService) {
+
+        listaFuncionarios = FXCollections.observableArrayList(funcService.buscarTodos());
+
+        listaSugestoes.setItems(listaFuncionarios);
+
+        // Quando digitar → filtra
+        campoFuncionario.textProperty().addListener((obs, old, novo) -> {
+            if (novo.isBlank()) {
+                listaSugestoes.setVisible(false);
+                listaSugestoes.setManaged(false);
+                return;
+            }
+
+            listaSugestoes.setItems(
+                    listaFuncionarios.filtered(f ->
+                            f.getNome().toLowerCase().contains(novo.toLowerCase())
+                    )
+            );
+
+            listaSugestoes.setVisible(true);
+            listaSugestoes.setManaged(true);
+        });
+
+        // Quando clicar numa sugestão → coloca no campo
+        listaSugestoes.setOnMouseClicked(ev -> {
+            Funcionario f = listaSugestoes.getSelectionModel().getSelectedItem();
+            if (f != null) {
+                campoFuncionario.setText(f.getNome());
+                listaSugestoes.setVisible(false);
+                listaSugestoes.setManaged(false);
+            }
+        });
+    }
+
 
 
     public void setImovelsObservable(ObservableList<Imovel> imovelsObservable) {
@@ -91,16 +154,19 @@ public class FormImovelController {
 
         String tela = ((Button)e.getSource()).getUserData().toString();
 
-        mostrarTela(telaEndereco);
-        mostrarTela(telaComodos);
-        mostrarTela(telaInformacoes);
-
         switch (tela){
-            case "endereco": mostrarTela(telaEndereco); break;
-            case "comodos": mostrarTela(telaComodos); break;
-            case "info":    mostrarTela(telaInformacoes); break;
+            case "endereco":
+                mostrarTela(telaEndereco);
+                break;
+            case "comodos":
+                mostrarTela(telaComodos);
+                break;
+            case "info":
+                mostrarTela(telaInformacoes);
+                break;
         }
     }
+
 
     private void mostrarTela(Node tela) {
         telaEndereco.setVisible(false);

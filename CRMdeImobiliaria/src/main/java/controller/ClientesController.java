@@ -175,7 +175,7 @@ public class ClientesController extends BaseController {
         tabelaClientes.setItems(clientesObservable);
     }
 
-        private void abrirModalEdicao(Cliente cliente) {
+    private void abrirModalEdicao(Cliente cliente) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sceneBuilder/FormCliente.fxml"));
             Parent root = loader.load();

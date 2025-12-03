@@ -40,4 +40,9 @@ public class Funcionario extends Pessoa{
     public void setCargo(Cargo cargo) {
         this.cargo = cargo;
     }
+
+    @Override
+    public String toString() {
+        return this.getNome();
+    }
 }

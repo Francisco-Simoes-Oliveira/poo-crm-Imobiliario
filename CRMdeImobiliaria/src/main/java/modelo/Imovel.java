@@ -3,6 +3,9 @@ package modelo;
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name = "imovel")
@@ -30,6 +33,8 @@ public class Imovel {
     @JoinColumn(name = "idCorretor", referencedColumnName = "id")
     private Funcionario funcionario;
 
+    private LocalDateTime dataCriacao;
+
     public Imovel() {}
 
     public Imovel(Endereco endereco, Double preco, Comodos comodos, StatusImovel statusImovel, Funcionario funcionario) {
@@ -38,6 +43,7 @@ public class Imovel {
         this.comodos = comodos;
         this.statusImovel = statusImovel;
         this.funcionario = funcionario;
+        this.dataCriacao = LocalDateTime.now();
     }
 
     public Long getId() {
