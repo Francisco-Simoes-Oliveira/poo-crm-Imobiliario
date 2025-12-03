@@ -4,7 +4,6 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
@@ -66,8 +65,12 @@ public class Imovel {
         this.comodos = comodos;
     }
 
-    public StatusImovel getStatus() {
+    public StatusImovel getStatusVisita() {
         return statusImovel;
+    }
+
+    public String getStatus() {
+        return statusImovel.name();
     }
 
     public void setStatus(StatusImovel statusImovel) {
@@ -84,7 +87,7 @@ public class Imovel {
 
     public String getLogradoro(){
         if (endereco== null)return "";
-        return endereco.getLogradoro();
+        return endereco.getLogradouro();
     }
 
     public Funcionario getFuncionario() {
@@ -93,6 +96,10 @@ public class Imovel {
 
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
+    }
+
+    public String toString(){
+        return getLogradoro();
     }
 
 }

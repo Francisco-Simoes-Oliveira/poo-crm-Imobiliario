@@ -6,20 +6,26 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import modelo.Cliente;
-import modelo.Funcionario;
-import modelo.StatusPessoa;
-import modelo.Visita;
+import modelo.*;
 import service.ClienteService;
 import service.FuncionarioService;
 import javafx.scene.control.ListView;
+import service.ImovelService;
+import service.VisitaService;
 import view.MainApp;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class FormVisitaController {
+
     @FXML private TextField campoCliente;
     @FXML private ListView<Cliente> listaSugestoesCliente;
     @FXML private TextField campoFuncionario;
     @FXML private ListView<Funcionario> listaSugestoesFunc;
+    @FXML private TextField campoImovel;
+    @FXML private ListView<Imovel> listaSugestoesImovel;
     @FXML private DatePicker date;
     @FXML private TextField hora;
 
@@ -28,6 +34,12 @@ public class FormVisitaController {
 
     private ObservableList<Cliente> listaClientes;
     private ObservableList<Funcionario> listaFuncionarios;
+    private ObservableList<Imovel> listaImovel;
+
+    private VisitaService visitaService = new VisitaService();
+    private ImovelService imovelService = new ImovelService();
+    private ClienteService clienteService = new ClienteService();
+    private FuncionarioService funcService = new FuncionarioService();
 
 
     public void setVisitasObservable(ObservableList<Visita> visitasObservable) {
@@ -44,16 +56,19 @@ public class FormVisitaController {
         listaSugestoesFunc.setManaged(false);
         listaSugestoesCliente.setVisible(false);
         listaSugestoesCliente.setManaged(false);
+        listaSugestoesImovel.setVisible(false);
+        listaSugestoesImovel.setManaged(false);
 
-        FuncionarioService funcService = new FuncionarioService();
-        configurarAutocompletef(funcService);
 
-        ClienteService clienteService = new ClienteService();
-        configurarAutocompletec(clienteService);
+        configurarAutocompletef();
+
+        configurarAutocompletec();
+
+        configurarAutocompletei();
 
     }
 
-    private void configurarAutocompletef(FuncionarioService funcService) {
+    private void configurarAutocompletef() {
 
         listaFuncionarios = FXCollections.observableArrayList(funcService.buscarTodos());
 
@@ -89,7 +104,7 @@ public class FormVisitaController {
     }
 
 
-    private void configurarAutocompletec(ClienteService clienteService) {
+    private void configurarAutocompletec() {
 
         listaClientes = FXCollections.observableArrayList(clienteService.buscarTodos());
 
@@ -124,36 +139,66 @@ public class FormVisitaController {
 
     }
 
+    private void configurarAutocompletei() {
+
+        listaImovel = FXCollections.observableArrayList(imovelService.buscarTodos());
+
+        listaSugestoesImovel.setItems(listaImovel);
+
+        // Quando digitar → filtra
+        campoImovel.textProperty().addListener((obs, old, novo) -> {
+            if (novo.isBlank()) {
+                listaSugestoesImovel.setVisible(false);
+                listaSugestoesImovel.setManaged(false);
+                return;
+            }
+
+            listaSugestoesImovel.setItems(
+                    listaImovel.filtered(i ->
+                            i.getEndereco().getLogradouro().toLowerCase().contains(novo.toLowerCase())
+                    )
+            );
+            listaSugestoesImovel.setVisible(true);
+            listaSugestoesImovel.setManaged(true);
+        });
+
+        listaSugestoesImovel.setOnMouseClicked(ev -> {
+            Imovel i = listaSugestoesImovel.getSelectionModel().getSelectedItem();
+            if (i != null) {
+                campoImovel.setText(i.getEndereco().getLogradouro());
+                listaSugestoesImovel.setVisible(false);
+                listaSugestoesImovel.setManaged(false);
+            }
+        });
+
+    }
+
 
     @FXML
     private void salvar() {
 
-        if (campoCliente.getText().isEmpty() || campoFuncionario.getText().isEmpty()) {
+        if (campoCliente.getText().isEmpty() || campoFuncionario.getText().isEmpty() || campoImovel.getText().isEmpty()
+        || date == null || hora.getText().isEmpty()) {
             MainApp.mostrarAlerta("Erro", "Todos os campo são obrigatórios!");
             return;
-        }/*
-        if(!nomeField.getText().isEmpty() && !cpfField.getText().isEmpty()) {
-            if (Cliente.validarCpf(cpfField.getText())) {
+        }
 
-                if (visitaAtual == null) visitaAtual = new Cliente();
-                visitaAtual.setNome(nomeField.getText());
-                visitaAtual.setCpf(cpfField.getText());
-                visitaAtual.setEmail(emailField.getText());
-                visitaAtual.setTelefone(telefoneField.getText());
+        if (visitaAtual == null) visitaAtual = new Visita();
+        visitaAtual.setCliente(clienteService.buscarPorNome(campoCliente.getText()));
+        visitaAtual.setFuncionario(funcService.buscarPorNome(campoFuncionario.getText()));
+        visitaAtual.setImovel(imovelService.buscarPorLogradouro(campoImovel.getText()));
 
-                if (status.isSelected()){
-                    visitaAtual.setStatus(StatusPessoa.ATIVO);
-                }else {
-                    visitaAtual.setStatus(StatusPessoa.DESATIVADO);
-                }
-                service.alter(visitaAtual);
-                Stage stage = (Stage) nomeField.getScene().getWindow();
-                if (visitasObservable != null) {
-                    visitasObservable.add(visitaAtual);
-                }
-                stage.close();
-            }else MainApp.mostrarAlerta("Erro", "CPF inválido!");;
-        }*/
+        DateTimeFormatter fmtHora = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime time = LocalTime.parse(hora.getText(),fmtHora);
+
+        visitaAtual.setHorarioVisita(LocalDateTime.of(date.getValue(),time));
+
+        visitaService.alter(visitaAtual);
+        Stage stage = (Stage) campoCliente.getScene().getWindow();
+        if (visitasObservable != null) {
+            visitasObservable.add(visitaAtual);
+        }
+        stage.close();
     }
     @FXML
     private void cancelar(){

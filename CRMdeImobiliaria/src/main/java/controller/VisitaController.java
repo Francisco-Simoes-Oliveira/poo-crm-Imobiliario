@@ -42,7 +42,7 @@ public class VisitaController extends BaseController {
 
         // 1️⃣ Vincula cada coluna à propriedade correspondente da classe Visita
         colunaId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colunaLogradoro.setCellValueFactory(new PropertyValueFactory<>("logradoro"));
+        colunaLogradoro.setCellValueFactory(new PropertyValueFactory<>("logradouro"));
         colunaStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colunaCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
         colunaFunc.setCellValueFactory(new PropertyValueFactory<>("funcionario"));
@@ -127,16 +127,13 @@ public class VisitaController extends BaseController {
             Stage modalStage = new Stage();
             modalStage.setTitle("Novo Visita");
 
-            // Define que é modal (bloqueia a janela principal enquanto está aberto)
             modalStage.initModality(Modality.APPLICATION_MODAL);
-
-            // Faz com que fique "sobre" a janela principal
             modalStage.initOwner(conteudo.getScene().getWindow());
 
             // Cria a cena e mostra
             Scene scene = new Scene(root);
             modalStage.setScene(scene);
-            modalStage.showAndWait(); // espera o usuário fechar
+            modalStage.showAndWait();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -181,13 +178,13 @@ public class VisitaController extends BaseController {
 
             switch (filtro) {
                 case "Logradoro":
-                    return visita.getImovel().getEndereco().getLogradoro().toLowerCase().contains(termo);
+                    return visita.getImovel().getEndereco().getLogradouro().toLowerCase().contains(termo);
                 case "CEP":
                     return visita.getImovel().getEndereco().getCep().contains(termo);
                 case "Cliente":
                     return visita.getCliente().getNome().toString().toLowerCase().contains(termo);
                 case "Status":
-                    return visita.getStatosVisita().toString().toLowerCase().contains(termo);
+                    return visita.getStatus().toString().toLowerCase().contains(termo);
                 default:
                     return false;
             }

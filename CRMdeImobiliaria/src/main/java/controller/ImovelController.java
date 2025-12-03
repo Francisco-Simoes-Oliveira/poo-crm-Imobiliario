@@ -137,27 +137,22 @@ public class ImovelController extends BaseController {
     @FXML
     private void abrirNovoImovelModal(){
         try {
-            // Carrega o FXML do modal
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sceneBuilder/FormImovel.fxml"));
             Parent root = loader.load();
 
             FormImovelController controller = loader.getController();
             controller.setImovelsObservable(imovelsObservable);
 
-            // Cria um novo stage
+
             Stage modalStage = new Stage();
             modalStage.setTitle("Novo Imovel");
 
-            // Define que é modal (bloqueia a janela principal enquanto está aberto)
             modalStage.initModality(Modality.APPLICATION_MODAL);
-
-            // Faz com que fique "sobre" a janela principal
             modalStage.initOwner(conteudo.getScene().getWindow());
 
-            // Cria a cena e mostra
             Scene scene = new Scene(root);
             modalStage.setScene(scene);
-            modalStage.showAndWait(); // espera o usuário fechar
+            modalStage.showAndWait();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -202,7 +197,7 @@ public class ImovelController extends BaseController {
 
             switch (filtro) {
                 case "Logradoro":
-                    return imovel.getEndereco().getLogradoro().toLowerCase().contains(termo);
+                    return imovel.getEndereco().getLogradouro().toLowerCase().contains(termo);
                 case "CEP":
                     return imovel.getEndereco().getCep().contains(termo);
                 case "Status":

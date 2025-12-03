@@ -1,7 +1,6 @@
 package service;
 
 
-import dao.ComodoDao;
 import dao.ImovelDao;
 import modelo.*;
 
@@ -31,7 +30,9 @@ public class ImovelService extends ServiceImplementacao<ImovelDao,Imovel,Long> {
         dao.add(imovel);
     }
 
-
+    public Imovel buscarPorLogradouro(String logradouro){
+        return dao.buscarPorLogradouro(logradouro);
+    }
     public List<Imovel> buscarTodos(){
         return dao.buscaTodos();
     }

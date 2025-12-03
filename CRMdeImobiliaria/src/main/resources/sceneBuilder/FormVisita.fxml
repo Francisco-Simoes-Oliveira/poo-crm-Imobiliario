@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="514.0" stylesheets="@/css/clienteStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FormVisitaController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="514.0" stylesheets="@/css/clienteStyle.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FormVisitaController">
     <children>
         <HBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="200.0">
             <children>
@@ -72,8 +72,8 @@
         <VBox layoutX="10.0" layoutY="10.0" prefHeight="46.0" prefWidth="215.0">
             <children>
                 <Label text="Imovel*" />
-                <TextField fx:id="campoFuncionario" prefHeight="25.0" prefWidth="105.0" promptText="🏠Imovel" />
-                <ListView fx:id="listaSugestoesFunc" prefHeight="16.0" prefWidth="215.0" />
+                <TextField fx:id="campoImovel" prefHeight="25.0" prefWidth="105.0" promptText="🏠Imovel" />
+                <ListView fx:id="listaSugestoesImovel" prefHeight="51.0" prefWidth="215.0" />
             </children>
             <VBox.margin>
                 <Insets left="10.0" right="10.0" />

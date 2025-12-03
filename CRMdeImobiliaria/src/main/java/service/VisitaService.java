@@ -13,7 +13,7 @@ public class VisitaService extends ServiceImplementacao<VisitaDao, Visita,Long>{
     }
 
     public Visita add(Visita visita){
-        if (visita.getCliente().getStatus() == StatusPessoa.DESATIVADO || visita.getImovel().getStatus() == StatusImovel.VENDIDO){
+        if (visita.getCliente().getStatus() == StatusPessoa.DESATIVADO || visita.getImovel().getStatusVisita() == StatusImovel.VENDIDO){
             MainApp.mostrarAlerta("ERRO","Cliente ou Imovel com o Status indevido");
             return visita;
         }
@@ -22,7 +22,7 @@ public class VisitaService extends ServiceImplementacao<VisitaDao, Visita,Long>{
     }
 
     public Visita add(Cliente cliente, Funcionario funcionario, Imovel imovel, LocalDateTime horarioVisita, StatusVisita statosVisita, String observacao){
-        if (cliente.getStatus() == StatusPessoa.DESATIVADO || imovel.getStatus() == StatusImovel.VENDIDO){
+        if (cliente.getStatus() == StatusPessoa.DESATIVADO || imovel.getStatusVisita() == StatusImovel.VENDIDO){
             MainApp.mostrarAlerta("ERRO","Cliente ou Imovel com o Status indevido");
             return null;
         }

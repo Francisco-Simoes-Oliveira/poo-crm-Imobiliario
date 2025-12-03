@@ -12,7 +12,7 @@ public class PropostaService extends ServiceImplementacao<PropostaDao, Proposta,
     }
 
     public Proposta add(Proposta proposta){
-        if (proposta.getCliente().getStatus() == StatusPessoa.DESATIVADO || proposta.getImovel().getStatus() == StatusImovel.VENDIDO){
+        if (proposta.getCliente().getStatus() == StatusPessoa.DESATIVADO || proposta.getImovel().getStatusVisita() == StatusImovel.VENDIDO){
             MainApp.mostrarAlerta("ERRO","Cliente ou Imovel com o Status indevido");
             return proposta;
         }
@@ -20,7 +20,7 @@ public class PropostaService extends ServiceImplementacao<PropostaDao, Proposta,
         return proposta;
     }
     public Proposta add(Cliente cliente, Funcionario funcionario, Imovel imovel, Double valorProposto , StatusProposta statusProposta, LocalDate prazoResposta){
-        if (cliente.getStatus() == StatusPessoa.DESATIVADO || imovel.getStatus() == StatusImovel.VENDIDO){
+        if (cliente.getStatus() == StatusPessoa.DESATIVADO || imovel.getStatusVisita() == StatusImovel.VENDIDO){
             MainApp.mostrarAlerta("ERRO","Cliente ou Imovel com o Status indevido");
             return null;
         }

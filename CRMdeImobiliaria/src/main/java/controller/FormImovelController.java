@@ -1,9 +1,7 @@
 package controller;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -13,7 +11,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 import modelo.*;
 import org.json.JSONObject;
 import service.FuncionarioService;
@@ -22,8 +19,6 @@ import view.MainApp;
 
 import java.io.File;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FormImovelController {
     private ImovelService service = new ImovelService();
@@ -142,7 +137,7 @@ public class FormImovelController {
         // Preenche os campos de texto normalmente
         nomeCidadeField.setText(imovel.getEndereco().getCidade());
         cepField.setText(imovel.getEndereco().getCep());
-        logradouroField.setText(imovel.getEndereco().getLogradoro());
+        logradouroField.setText(imovel.getEndereco().getLogradouro());
         ufField.setText(imovel.getEndereco().getUf());
         numeroField.setText(imovel.getEndereco().getNumero());
         complementoField.setText(imovel.getEndereco().getComplemento());
@@ -168,7 +163,7 @@ public class FormImovelController {
         );
 
         precoField.setText(imovel.getPreco().toString());
-        statusBox.setValue(imovel.getStatus().name());
+        statusBox.setValue(imovel.getStatus());
         campoFuncionario.setText(imovel.getFuncionario().getNome());
 
     }
@@ -265,7 +260,7 @@ public class FormImovelController {
                 //Muita coisa
                 imovelAtual.getEndereco().setCidade(nomeCidadeField.getText());
                 imovelAtual.getEndereco().setCep(cepField.getText());
-                imovelAtual.getEndereco().setLogradoro(logradouroField.getText());
+                imovelAtual.getEndereco().setLogradouro(logradouroField.getText());
                 imovelAtual.getEndereco().setUf(ufField.getText());
                 imovelAtual.getEndereco().setComplemento(complementoField.getText());
 

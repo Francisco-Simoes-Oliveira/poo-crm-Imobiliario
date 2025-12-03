@@ -1,7 +1,6 @@
 package modelo;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -19,7 +18,7 @@ public class Endereco {
     private Long id;
 
     private String cep;
-    private String logradoro;
+    private String logradouro;
     private String bairro;
     private String cidade;
     private String uf;
@@ -28,9 +27,9 @@ public class Endereco {
 
     public Endereco() {}
 
-    public Endereco(String cep,String logradoro, String bairro, String cidade, String uf,String numero, String complemento) {
+    public Endereco(String cep, String logradouro, String bairro, String cidade, String uf, String numero, String complemento) {
         this.cep = cep;
-        this.logradoro = logradoro;
+        this.logradouro = logradouro;
         this.bairro = bairro;
         this.cidade = cidade;
         this.uf = uf;
@@ -71,12 +70,12 @@ public class Endereco {
         this.cep = cep;
     }
 
-    public String getLogradoro() {
-        return logradoro;
+    public String getLogradouro() {
+        return logradouro;
     }
 
-    public void setLogradoro(String logradoro) {
-        this.logradoro = logradoro;
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
     }
 
     public String getBairro() {
