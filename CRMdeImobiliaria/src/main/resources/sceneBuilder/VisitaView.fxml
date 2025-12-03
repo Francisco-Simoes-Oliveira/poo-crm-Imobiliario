@@ -45,10 +45,11 @@
             <TableView fx:id="tabelaVisitas" prefHeight="400" prefWidth="800.0">
                 <columns>
                     <TableColumn fx:id="colunaId" prefWidth="70.19999694824219" text="Id" />
-                    <TableColumn fx:id="colunaLogradoro" prefWidth="275.3999938964844" text="Logradoro" />
-                    <TableColumn fx:id="colunaStatus" prefWidth="103.60000610351562" text="Status" />
-                    <TableColumn fx:id="colunaCliente" prefWidth="176.0" text="Cliente" />
-                    <TableColumn fx:id="colunaInfo" prefWidth="89.5999755859375" text="Info" />
+                    <TableColumn fx:id="colunaLogradoro" prefWidth="244.0" text="Logradoro" />
+                    <TableColumn fx:id="colunaStatus" prefWidth="129.0" text="Status" />
+                    <TableColumn fx:id="colunaCliente" prefWidth="149.0" text="Cliente" />
+                    <TableColumn fx:id="colunaFunc" prefWidth="122.0" text="Corretor" />
+                    <TableColumn fx:id="colunaInfo" prefWidth="77.0" text="Info" />
                     <TableColumn fx:id="colunaAcoes" prefWidth="87.0" text="Ações" />
                 </columns>
             </TableView>

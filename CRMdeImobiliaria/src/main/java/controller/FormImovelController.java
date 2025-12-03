@@ -90,7 +90,6 @@ public class FormImovelController {
         );
 
         FuncionarioService funcService = new FuncionarioService();
-        listaFuncionarios = FXCollections.observableArrayList(funcService.buscarTodos());
 
         configurarAutocomplete(funcService);
 

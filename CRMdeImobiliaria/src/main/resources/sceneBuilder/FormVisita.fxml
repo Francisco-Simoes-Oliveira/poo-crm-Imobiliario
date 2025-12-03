@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" stylesheets="@/css/clienteStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FormVisitaController">
+    <children>
+        <HBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="200.0">
+            <children>
+                <Label text="Cadastrar Nova Visita">
+                    <font>
+                        <Font name="Arial Black" size="16.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets left="10.0" />
+                    </HBox.margin>
+                </Label>
+            </children>
+        </HBox>
+        <Separator prefWidth="200.0">
+            <padding>
+                <Insets top="1.0" />
+            </padding>
+        </Separator>
+        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+         <children>
+            <Label text="STATOS">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></Label>
+            <VBox prefHeight="200.0" prefWidth="100.0" />
+             <ChoiceBox prefHeight="25.0" prefWidth="135.0">
+                 <items>
+                 <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="AGENDADA" />
+                     <String fx:value="REALIZADA" />
+                     <String fx:value="CANCELADA" />
+                 </FXCollections>
+                 </items>
+             </ChoiceBox>
+         </children>
+         <VBox.margin>
+            <Insets left="10.0" />
+         </VBox.margin></HBox>
+        <VBox prefHeight="100.0" prefWidth="100.0">
+            <children>
+                <Label text="NOME CLIENTE*" />
+                <TextField fx:id="campoCliente" promptText="👤 Nome Completo do Cliente">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin></TextField>
+            <ListView fx:id="listaSugestoesCliente" prefHeight="200.0" prefWidth="200.0" />
+            </children>
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" />
+            </VBox.margin>
+        </VBox>
+        <VBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="100.0">
+            <children>
+                <Label text="NOME FUNCIONARIO*" />
+                <TextField fx:id="campoFuncionario" promptText="👤 Nome Completo do Funcionario" />
+            </children>
+            <ListView fx:id="listaSugestoesFunc" prefHeight="200.0" prefWidth="200.0" />
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" />
+            </VBox.margin>
+        </VBox>
+        <VBox layoutX="10.0" layoutY="210.0" prefHeight="100.0" prefWidth="100.0">
+            <children>
+                <Label text="DATA" />
+                <TextField fx:id="emailField" promptText="📧 email@exemplo.com" />
+            </children>
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" />
+            </VBox.margin>
+        </VBox>
+        <VBox prefHeight="100.0" prefWidth="100.0">
+            <children>
+                <Label text="TELEFONE" />
+                <TextField fx:id="telefoneField" promptText="📞(00) 00000-0000">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </TextField>
+            </children>
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" />
+            </VBox.margin>
+        </VBox>
+        <Separator prefWidth="200.0" />
+        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+            <children>
+                <Pane prefHeight="200.0" prefWidth="200.0" />
+                <Button mnemonicParsing="false" onAction="#cancelar" text="Cancelar">
+                    <HBox.margin>
+                        <Insets left="20.0" />
+                    </HBox.margin>
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#salvar" styleClass="btn-salvar" text="Salvar">
+                    <HBox.margin>
+                        <Insets left="20.0" />
+                    </HBox.margin>
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+            </children>
+        </HBox>
+    </children>
+</VBox>

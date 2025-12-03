@@ -31,7 +31,7 @@ public class MainAppController extends BaseController implements Initializable {
 
     @FXML
     private void abrirVisitas() {
-        trocarTela("/sceneBuilder/VisitasView.fxml");
+        trocarTela("/sceneBuilder/VisitaView.fxml");
     }
 
     @FXML
