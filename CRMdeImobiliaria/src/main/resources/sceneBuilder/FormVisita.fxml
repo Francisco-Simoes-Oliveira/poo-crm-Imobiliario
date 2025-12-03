@@ -83,8 +83,8 @@
             <children>
                 <Label text="Data e Hora*" />
                 <HBox spacing="5.0">
-               <DatePicker prefHeight="25.0" prefWidth="202.0" />
-                  <TextField promptText="Horas" />
+               <DatePicker fx:id="date" prefHeight="25.0" prefWidth="202.0" />
+                  <TextField fx:id="hora" promptText="Horas" />
                 </HBox>
             </children>
          </VBox>

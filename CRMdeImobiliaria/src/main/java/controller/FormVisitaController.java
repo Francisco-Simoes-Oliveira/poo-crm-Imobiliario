@@ -3,6 +3,7 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import modelo.Cliente;
@@ -19,6 +20,8 @@ public class FormVisitaController {
     @FXML private ListView<Cliente> listaSugestoesCliente;
     @FXML private TextField campoFuncionario;
     @FXML private ListView<Funcionario> listaSugestoesFunc;
+    @FXML private DatePicker date;
+    @FXML private TextField hora;
 
     private Visita visitaAtual;
     private ObservableList<Visita> visitasObservable;
