@@ -4,12 +4,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import modelo.Cliente;
 import modelo.Funcionario;
+import modelo.StatusPessoa;
 import modelo.Visita;
 import service.ClienteService;
 import service.FuncionarioService;
 import javafx.scene.control.ListView;
+import view.MainApp;
 
 public class FormVisitaController {
     @FXML private TextField campoCliente;
@@ -42,7 +45,6 @@ public class FormVisitaController {
 
     }
 
-
     private void configurarAutocomplete(FuncionarioService funcService) {
 
         listaFuncionarios = FXCollections.observableArrayList(funcService.buscarTodos());
@@ -66,7 +68,18 @@ public class FormVisitaController {
             listaSugestoesFunc.setVisible(true);
             listaSugestoesFunc.setManaged(true);
         });
+
+        // Quando clicar numa sugestão → coloca no campo
+        listaSugestoesFunc.setOnMouseClicked(ev -> {
+            Funcionario f = listaSugestoesFunc.getSelectionModel().getSelectedItem();
+            if (f != null) {
+                campoFuncionario.setText(f.getNome());
+                listaSugestoesFunc.setVisible(false);
+                listaSugestoesFunc.setManaged(false);
+            }
+        });
     }
+
 
     private void configurarAutocomplete(ClienteService clienteService) {
 
@@ -83,13 +96,61 @@ public class FormVisitaController {
             }
 
             listaSugestoesCliente.setItems(
-                    listaClientes.filtered(f ->
-                            f.getNome().toLowerCase().contains(novo.toLowerCase())
+                    listaClientes.filtered(c ->
+                            c.getNome().toLowerCase().contains(novo.toLowerCase())
                     )
             );
 
             listaSugestoesCliente.setVisible(true);
             listaSugestoesCliente.setManaged(true);
         });
+
+        listaSugestoesFunc.setOnMouseClicked(ev -> {
+            Cliente c = listaSugestoesCliente.getSelectionModel().getSelectedItem();
+            if (c != null) {
+                campoCliente.setText(c.getNome());
+                listaSugestoesFunc.setVisible(false);
+                listaSugestoesFunc.setManaged(false);
+            }
+        });
+
     }
+
+
+    @FXML
+    private void salvar() {
+
+        if (campoCliente.getText().isEmpty() || campoFuncionario.getText().isEmpty()) {
+            MainApp.mostrarAlerta("Erro", "Todos os campo são obrigatórios!");
+            return;
+        }/*
+        if(!nomeField.getText().isEmpty() && !cpfField.getText().isEmpty()) {
+            if (Cliente.validarCpf(cpfField.getText())) {
+
+                if (visitaAtual == null) visitaAtual = new Cliente();
+                visitaAtual.setNome(nomeField.getText());
+                visitaAtual.setCpf(cpfField.getText());
+                visitaAtual.setEmail(emailField.getText());
+                visitaAtual.setTelefone(telefoneField.getText());
+
+                if (status.isSelected()){
+                    visitaAtual.setStatus(StatusPessoa.ATIVO);
+                }else {
+                    visitaAtual.setStatus(StatusPessoa.DESATIVADO);
+                }
+                service.alter(visitaAtual);
+                Stage stage = (Stage) nomeField.getScene().getWindow();
+                if (visitasObservable != null) {
+                    visitasObservable.add(visitaAtual);
+                }
+                stage.close();
+            }else MainApp.mostrarAlerta("Erro", "CPF inválido!");;
+        }*/
+    }
+    @FXML
+    private void cancelar(){
+        Stage stage = (Stage) campoCliente.getScene().getWindow();
+        stage.close();
+    }
+
 }

@@ -27,18 +27,13 @@ public class VisitaController extends BaseController {
     private TableView<Visita> tabelaVisitas;
     private ObservableList<Visita> visitasObservable;
 
-    @FXML
-    private TableColumn<Visita, String> colunaId;
-    @FXML
-    private TableColumn<Visita, String> colunaLogradoro;
-    @FXML
-    private TableColumn<Visita, String> colunaStatus;
-    @FXML
-    private TableColumn<Visita, Void> colunaCliente;
-    @FXML
-    private TableColumn<Visita, Void> colunaInfo;
-    @FXML
-    private TableColumn<Visita, Void> colunaAcoes;
+    @FXML private TableColumn<Visita, String> colunaId;
+    @FXML private TableColumn<Visita, String> colunaLogradoro;
+    @FXML private TableColumn<Visita, String> colunaStatus;
+    @FXML private TableColumn<Visita, String> colunaCliente;
+    @FXML private TableColumn<Visita, String> colunaFunc;
+    @FXML private TableColumn<Visita, Void> colunaInfo;
+    @FXML private TableColumn<Visita, Void> colunaAcoes;
 
     @FXML
     public void initialize() {
@@ -49,6 +44,8 @@ public class VisitaController extends BaseController {
         colunaId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colunaLogradoro.setCellValueFactory(new PropertyValueFactory<>("logradoro"));
         colunaStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        colunaCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
+        colunaFunc.setCellValueFactory(new PropertyValueFactory<>("funcionario"));
 
         // 2️⃣ Define tamanhos preferenciais (servem como "proporções")
         colunaId.setPrefWidth(60);
