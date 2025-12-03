@@ -249,7 +249,7 @@
                                  <Font name="Arial" size="14.0" />
                               </font>
                            </Label>
-                           <TextField prefHeight="26.0" prefWidth="151.0" />
+                           <TextField fx:id="precoField" prefHeight="26.0" prefWidth="151.0" />
                         </children>
                      </HBox>
                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
@@ -259,7 +259,7 @@
                                  <Font name="Arial" size="14.0" />
                               </font>
                            </Label>
-                            <ChoiceBox prefHeight="26.0" prefWidth="102.0">
+                            <ChoiceBox fx:id="statusBox" prefHeight="26.0" prefWidth="102.0">
                                 <items>
                                     <FXCollections fx:factory="observableArrayList">
                                         <String fx:value="DISPONIVEL" />

@@ -12,13 +12,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import modelo.Funcionario;
-import modelo.Imovel;
-import modelo.Endereco;
+import modelo.*;
 import org.json.JSONObject;
 import service.FuncionarioService;
 import service.ImovelService;
+import view.MainApp;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -39,14 +39,15 @@ public class FormImovelController {
     @FXML private TextField numeroField;
     @FXML private TextField complementoField;
 
-    @FXML private Spinner spinnerQuarto;
-    @FXML private Spinner spinnerSala;
-    @FXML private Spinner spinnerBanheiro;
-    @FXML private Spinner spinnerCozinha;
-    @FXML private Spinner spinnerLavanderia;
-    @FXML private Spinner spinnerGaragem;
+    @FXML private Spinner<Integer> spinnerQuarto;
+    @FXML private Spinner<Integer> spinnerSala;
+    @FXML private Spinner<Integer> spinnerBanheiro;
+    @FXML private Spinner<Integer> spinnerCozinha;
+    @FXML private Spinner<Integer> spinnerLavanderia;
+    @FXML private Spinner<Integer> spinnerGaragem;
 
-
+    @FXML private TextField precoField;
+    @FXML private ChoiceBox<String> statusBox;
     @FXML private TextField campoFuncionario;
     @FXML private ListView<Funcionario> listaSugestoes;
     private ObservableList<Funcionario> listaFuncionarios;
@@ -59,7 +60,13 @@ public class FormImovelController {
 
     public void initialize(){
 
+        precoField.textProperty().addListener((obs, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*(\\.\\d*)?")) {
+                precoField.setText(oldValue);
+            }
+        });
 
+        //Fazer mascara se der tempo
 
         mostrarTela(telaEndereco);
 
@@ -140,6 +147,8 @@ public class FormImovelController {
         ufField.setText(imovel.getEndereco().getUf());
         numeroField.setText(imovel.getEndereco().getNumero());
         complementoField.setText(imovel.getEndereco().getComplemento());
+
+        precoField.setText(imovel.getPreco().toString());
     }
 
     @FXML
@@ -213,42 +222,89 @@ public class FormImovelController {
         }
     }
 
+    /*
+    nomeCidadeField;
+    cepField;
+    logradouroField;
+    ufField;
+    numeroField;
+    complementoField;
+
+    spinnerQuarto;
+    spinnerSala;
+    spinnerBanheiro;
+    spinnerCozinha;
+    spinnerLavanderia;
+    spinnerGaragem;
+    */
 
 
-/*
     @FXML
     private void salvar() {
+        try {
+            if (nomeCidadeField.getText().isEmpty() || cepField.getText().isEmpty() ||logradouroField.getText().isEmpty()
+            ||ufField.getText().isEmpty() || numeroField.getText().isEmpty() || precoField.getText().isEmpty()) {
+                MainApp.mostrarAlerta("Erro", "Compos da area Endereço são obrigatórios!");
+                return;
+            }
+            if(!nomeCidadeField.getText().isEmpty() && !cepField.getText().isEmpty()) {
 
-        if (nomeCidadeField.getText().isEmpty() || cepField.getText().isEmpty()) {
-            MainApp.mostrarAlerta("Erro", "O campo nome e CPF são obrigatórios!");
-            return;
-        }
-        if(!nomeCidadeField.getText().isEmpty() && !cepField.getText().isEmpty()) {
-            if (Imovel.validarCpf(cepField.getText())) {
 
-                if (imovelAtual == null) imovelAtual = new Imovel();
-                imovelAtual.setNome(nomeCidadeField.getText());
-                imovelAtual.setCpf(cepField.getText());
-                imovelAtual.setEmail(emailField.getText());
-                imovelAtual.setTelefone(telefoneField.getText());
-
-                if (status.isSelected()){
-                    imovelAtual.setStatus(StatusPessoa.ATIVO);
-                }else {
-                    imovelAtual.setStatus(StatusPessoa.DESATIVADO);
+                if (imovelAtual == null) {
+                    imovelAtual = new Imovel();
+                    imovelAtual.setEndereco(new Endereco());
+                    imovelAtual.setComodos(new Comodos());
                 }
+
+                //Muita coisa
+                imovelAtual.getEndereco().setCidade(nomeCidadeField.getText());
+                imovelAtual.getEndereco().setCep(cepField.getText());
+                imovelAtual.getEndereco().setLogradoro(logradouroField.getText());
+                imovelAtual.getEndereco().setUf(ufField.getText());
+                imovelAtual.getEndereco().setComplemento(complementoField.getText());
+
+                imovelAtual.getComodos().setQuarto(spinnerQuarto.getValue());
+                imovelAtual.getComodos().setSala(spinnerSala.getValue());
+                imovelAtual.getComodos().setBanheiro(spinnerBanheiro.getValue());
+                imovelAtual.getComodos().setCozinha(spinnerCozinha.getValue());
+                imovelAtual.getComodos().setLavanderia(spinnerLavanderia.getValue());
+                imovelAtual.getComodos().setGaragem(spinnerGaragem.getValue());
+
+                FuncionarioService funcService = new FuncionarioService();
+                imovelAtual.setFuncionario(funcService.buscarPorNome(campoFuncionario.getText()));
+
+                imovelAtual.setPreco(Double.parseDouble(precoField.getText()));
+
+                switch (statusBox.getValue()){
+                    case "DISPONIVEL":
+                        imovelAtual.setStatus(StatusImovel.DISPONIVEL);
+                        break;
+                    case "NEGOCIAÇÃO":
+                        imovelAtual.setStatus(StatusImovel.NEGOCIAÇÃO);
+                        break;
+                    case "VENDIDO":
+                        imovelAtual.setStatus(StatusImovel.VENDIDO);
+                        break;
+                    case "ALUGADO":
+                        imovelAtual.setStatus(StatusImovel.ALUGADO);
+                        break;
+                }
+
                 service.alter(imovelAtual);
                 Stage stage = (Stage) nomeCidadeField.getScene().getWindow();
                 if (imovelsObservable != null) {
                     imovelsObservable.add(imovelAtual);
                 }
                 stage.close();
-            }else MainApp.mostrarAlerta("Erro", "CPF inválido!");;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            MainApp.mostrarAlerta("Erro grave", "Não foi possível salvar o imóvel.");
         }
     }
     @FXML
     private void cancelar(){
         Stage stage = (Stage) nomeCidadeField.getScene().getWindow();
         stage.close();
-    }*/
+    }
 }
