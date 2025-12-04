@@ -13,6 +13,8 @@ import service.ClienteService;
 
 import com.github.javafaker.Faker;
 
+import java.util.Locale;
+
 
 public class ConfiguracaoController {
 
@@ -22,7 +24,7 @@ public class ConfiguracaoController {
     @FXML private TextField funcionarioField;
     @FXML private TextField imovelField;
 
-    private final Faker faker = new Faker();
+    private final Faker faker = new Faker(new Locale("pt-BR"));
 
     public void initialize() {
         clienteField.textProperty().addListener((obs, oldValue, newValue) -> {
