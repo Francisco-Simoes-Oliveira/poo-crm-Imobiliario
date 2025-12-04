@@ -98,6 +98,7 @@ public class Imovel {
         this.funcionario = funcionario;
     }
 
+    @Override
     public String toString(){
         return getLogradoro();
     }
