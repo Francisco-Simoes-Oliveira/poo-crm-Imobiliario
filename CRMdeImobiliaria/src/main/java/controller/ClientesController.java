@@ -36,27 +36,23 @@ public class ClientesController extends BaseController {
     @FXML
     private void abrirNovoClienteModal() {
         try {
-            // Carrega o FXML do modal
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sceneBuilder/FormCliente.fxml"));
             Parent root = loader.load();
 
             FormClienteController controller = loader.getController();
             controller.setClientesObservable(clientesObservable);
 
-            // Cria um novo stage
             Stage modalStage = new Stage();
             modalStage.setTitle("Novo Cliente");
 
-            // Define que é modal (bloqueia a janela principal enquanto está aberto)
             modalStage.initModality(Modality.APPLICATION_MODAL);
 
-            // Faz com que fique "sobre" a janela principal
             modalStage.initOwner(conteudo.getScene().getWindow());
 
-            // Cria a cena e mostra
             Scene scene = new Scene(root);
             modalStage.setScene(scene);
-            modalStage.showAndWait(); // espera o usuário fechar
+            modalStage.showAndWait();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -109,7 +105,7 @@ public class ClientesController extends BaseController {
 
     @FXML
     public void initialize() {
-        comboFiltro.getSelectionModel().selectFirst(); // Seleciona "Nome" por padrão
+        comboFiltro.getSelectionModel().selectFirst();
 
 
 
@@ -150,7 +146,7 @@ public class ClientesController extends BaseController {
             private final Button btn = new Button("Editar");
 
             {
-                btn.getStyleClass().add("edit-button"); // se quiser estilizar no CSS
+                btn.getStyleClass().add("edit-button");
                 btn.setOnAction(event -> {
                     Cliente cliente = getTableView().getItems().get(getIndex());
                     abrirModalEdicao(cliente);
@@ -178,7 +174,7 @@ public class ClientesController extends BaseController {
 
             // Passa o cliente selecionado para o controlador do modal
             FormClienteController controller = loader.getController();
-            controller.setCliente(cliente); // você cria esse método no FormClienteController
+            controller.setCliente(cliente);
 
             Stage stage = new Stage();
             stage.setTitle("Editar Cliente");
@@ -186,9 +182,8 @@ public class ClientesController extends BaseController {
             stage.initOwner(conteudo.getScene().getWindow());
 
             stage.setScene(new Scene(root));
-            stage.showAndWait(); // bloqueia até o modal ser fechado
+            stage.showAndWait();
 
-            // Atualiza a tabela depois que o modal fecha
             tabelaClientes.setItems(FXCollections.observableArrayList(service.buscarTodos()));
         } catch (IOException e) {
             e.printStackTrace();

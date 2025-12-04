@@ -42,27 +42,21 @@ public class ImovelController extends BaseController {
 
     @FXML
     public void initialize() {
-        comboFiltro.getSelectionModel().selectFirst(); // Seleciona "Nome" por padrão
+        comboFiltro.getSelectionModel().selectFirst();
 
-
-        // 1️⃣ Vincula cada coluna à propriedade correspondente da classe Imovel
         colunaId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colunaLogradoro.setCellValueFactory(new PropertyValueFactory<>("logradoro"));
         colunaStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        // 2️⃣ Define tamanhos preferenciais (servem como "proporções")
         colunaId.setPrefWidth(60);
         colunaLogradoro.setPrefWidth(200);
         colunaStatus.setPrefWidth(150);
        
 
-        // (Opcional) Define tamanhos mínimos para não espremer demais
         colunaLogradoro.setMinWidth(150);
 
-        // 3️⃣ Ativa o redimensionamento automático das colunas
         tabelaImovels.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
 
-        // 4️⃣ Carrega os
         carregarImovels();
 
         campoPesquisa.textProperty().addListener((obs, oldVal, newVal) -> pesquisar());
@@ -169,7 +163,6 @@ public class ImovelController extends BaseController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sceneBuilder/FormImovel.fxml"));
             Parent root = loader.load();
 
-            // Passa o imovel selecionado para o controlador do modal
             FormImovelController controller = loader.getController();
             controller.setImovel(imovel); // você cria esse método no FormImovelController
 
@@ -179,9 +172,8 @@ public class ImovelController extends BaseController {
             stage.initOwner(conteudo.getScene().getWindow());
 
             stage.setScene(new Scene(root));
-            stage.showAndWait(); // bloqueia até o modal ser fechado
+            stage.showAndWait();
 
-            // Atualiza a tabela depois que o modal fecha
             tabelaImovels.setItems(FXCollections.observableArrayList(service.buscarTodos()));
         } catch (IOException e) {
             e.printStackTrace();

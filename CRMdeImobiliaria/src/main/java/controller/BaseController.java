@@ -9,7 +9,7 @@ import java.net.URL;
 
 public abstract class BaseController {
 
-    protected StackPane conteudo; // referência compartilhada
+    protected StackPane conteudo;
 
     public void setConteudo(StackPane conteudo) {
         this.conteudo = conteudo;

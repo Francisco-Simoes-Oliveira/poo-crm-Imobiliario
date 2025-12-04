@@ -37,29 +37,24 @@ public class VisitaController extends BaseController {
 
     @FXML
     public void initialize() {
-        comboFiltro.getSelectionModel().selectFirst(); // Seleciona "Nome" por padrão
+        comboFiltro.getSelectionModel().selectFirst();
 
 
-        // 1️⃣ Vincula cada coluna à propriedade correspondente da classe Visita
         colunaId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colunaLogradoro.setCellValueFactory(new PropertyValueFactory<>("logradouro"));
         colunaStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colunaCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
         colunaFunc.setCellValueFactory(new PropertyValueFactory<>("funcionario"));
 
-        // 2️⃣ Define tamanhos preferenciais (servem como "proporções")
         colunaId.setPrefWidth(60);
         colunaLogradoro.setPrefWidth(200);
         colunaStatus.setPrefWidth(150);
 
 
-        // (Opcional) Define tamanhos mínimos para não espremer demais
         colunaLogradoro.setMinWidth(150);
 
-        // 3️⃣ Ativa o redimensionamento automático das colunas
         tabelaVisitas.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
 
-        // 4️⃣ Carrega os
         carregarVisitas();
 
         campoPesquisa.textProperty().addListener((obs, oldVal, newVal) -> pesquisar());
