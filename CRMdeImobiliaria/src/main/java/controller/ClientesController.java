@@ -112,29 +112,25 @@ public class ClientesController extends BaseController {
         comboFiltro.getSelectionModel().selectFirst(); // Seleciona "Nome" por padrão
 
 
-        // 1️⃣ Vincula cada coluna à propriedade correspondente da classe Cliente
+
         colunaId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         colunaEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         colunaTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
         colunaStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-
-        // 2️⃣ Define tamanhos preferenciais (servem como "proporções")
         colunaId.setPrefWidth(60);
         colunaNome.setPrefWidth(200);
         colunaEmail.setPrefWidth(240);
         colunaTelefone.setPrefWidth(120);
         colunaStatus.setPrefWidth(120);
 
-        // (Opcional) Define tamanhos mínimos para não espremer demais
         colunaNome.setMinWidth(150);
         colunaEmail.setMinWidth(180);
 
-        // 3️⃣ Ativa o redimensionamento automático das colunas
+
         tabelaClientes.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
 
-        // 4️⃣ Carrega os
         carregarClientes();
 
         campoPesquisa.textProperty().addListener((obs, oldVal, newVal) -> pesquisar());

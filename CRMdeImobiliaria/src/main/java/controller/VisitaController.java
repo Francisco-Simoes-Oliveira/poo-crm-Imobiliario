@@ -116,21 +116,20 @@ public class VisitaController extends BaseController {
     @FXML
     private void abrirNovoVisitaModal(){
         try {
-            // Carrega o FXML do modal
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sceneBuilder/FormVisita.fxml"));
             Parent root = loader.load();
 
             FormVisitaController controller = loader.getController();
             controller.setVisitasObservable(visitasObservable);
 
-            // Cria um novo stage
+
             Stage modalStage = new Stage();
             modalStage.setTitle("Novo Visita");
 
             modalStage.initModality(Modality.APPLICATION_MODAL);
             modalStage.initOwner(conteudo.getScene().getWindow());
 
-            // Cria a cena e mostra
             Scene scene = new Scene(root);
             modalStage.setScene(scene);
             modalStage.showAndWait();
@@ -150,9 +149,8 @@ public class VisitaController extends BaseController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sceneBuilder/FormVisita.fxml"));
             Parent root = loader.load();
 
-            // Passa o visita selecionado para o controlador do modal
             FormVisitaController controller = loader.getController();
-            controller.setVisita(visita); // você cria esse método no FormVisitaController
+            controller.setVisita(visita);
 
             Stage stage = new Stage();
             stage.setTitle("Editar Visita");
@@ -160,9 +158,8 @@ public class VisitaController extends BaseController {
             stage.initOwner(conteudo.getScene().getWindow());
 
             stage.setScene(new Scene(root));
-            stage.showAndWait(); // bloqueia até o modal ser fechado
+            stage.showAndWait();
 
-            // Atualiza a tabela depois que o modal fecha
             tabelaVisitas.setItems(FXCollections.observableArrayList(service.buscarTodos()));
         } catch (IOException e) {
             e.printStackTrace();

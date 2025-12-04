@@ -3,6 +3,7 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -20,6 +21,7 @@ import java.time.format.DateTimeFormatter;
 
 public class FormVisitaController {
 
+    @FXML private ChoiceBox<String> statusBox;
     @FXML private TextField campoCliente;
     @FXML private ListView<Cliente> listaSugestoesCliente;
     @FXML private TextField campoFuncionario;
@@ -47,7 +49,15 @@ public class FormVisitaController {
     }
 
     public void setVisita(Visita visita) {
+        this.visitaAtual = visita;
 
+        statusBox.setValue(visita.getStatus());
+        campoCliente.setText(visita.getCliente().getNome());
+        campoFuncionario.setText(visita.getFuncionario().getNome());
+        campoImovel.setText(visita.getLogradouro());
+        date.setValue(visita.getHorarioVisita().toLocalDate());
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
+        hora.setText(visita.getHorarioVisita().toLocalTime().format(dtf));
     }
 
 
@@ -74,7 +84,6 @@ public class FormVisitaController {
 
         listaSugestoesFunc.setItems(listaFuncionarios);
 
-        // Quando digitar → filtra
         campoFuncionario.textProperty().addListener((obs, old, novo) -> {
             if (novo.isBlank()) {
                 listaSugestoesFunc.setVisible(false);
@@ -187,6 +196,19 @@ public class FormVisitaController {
         visitaAtual.setCliente(clienteService.buscarPorNome(campoCliente.getText()));
         visitaAtual.setFuncionario(funcService.buscarPorNome(campoFuncionario.getText()));
         visitaAtual.setImovel(imovelService.buscarPorLogradouro(campoImovel.getText()));
+
+        switch (statusBox.getValue()){
+            case "AGENDADA":
+                visitaAtual.setStatus(StatusVisita.AGENDADA);
+                break;
+            case "CANCELADA":
+                visitaAtual.setStatus(StatusVisita.CANCELADA);
+                break;
+            case "REALIZADA":
+                visitaAtual.setStatus(StatusVisita.REALIZADA);
+                break;
+        }
+
 
         DateTimeFormatter fmtHora = DateTimeFormatter.ofPattern("HH:mm");
         LocalTime time = LocalTime.parse(hora.getText(),fmtHora);
